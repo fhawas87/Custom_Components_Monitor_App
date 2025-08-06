@@ -201,6 +201,30 @@ src/gpu_info/gpu_params/gpu_memory_info.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_memory_info.cpp.s
 .PHONY : src/gpu_info/gpu_params/gpu_memory_info.cpp.s
 
+src/gpu_info/gpu_params/gpu_other_params.o: src/gpu_info/gpu_params/gpu_other_params.cpp.o
+.PHONY : src/gpu_info/gpu_params/gpu_other_params.o
+
+# target to build an object file
+src/gpu_info/gpu_params/gpu_other_params.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_other_params.cpp.o
+.PHONY : src/gpu_info/gpu_params/gpu_other_params.cpp.o
+
+src/gpu_info/gpu_params/gpu_other_params.i: src/gpu_info/gpu_params/gpu_other_params.cpp.i
+.PHONY : src/gpu_info/gpu_params/gpu_other_params.i
+
+# target to preprocess a source file
+src/gpu_info/gpu_params/gpu_other_params.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_other_params.cpp.i
+.PHONY : src/gpu_info/gpu_params/gpu_other_params.cpp.i
+
+src/gpu_info/gpu_params/gpu_other_params.s: src/gpu_info/gpu_params/gpu_other_params.cpp.s
+.PHONY : src/gpu_info/gpu_params/gpu_other_params.s
+
+# target to generate assembly for a file
+src/gpu_info/gpu_params/gpu_other_params.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_other_params.cpp.s
+.PHONY : src/gpu_info/gpu_params/gpu_other_params.cpp.s
+
 src/gpu_info/gpu_params/gpu_thermal_value.o: src/gpu_info/gpu_params/gpu_thermal_value.cpp.o
 .PHONY : src/gpu_info/gpu_params/gpu_thermal_value.o
 
@@ -291,6 +315,9 @@ help:
 	@echo "... src/gpu_info/gpu_params/gpu_memory_info.o"
 	@echo "... src/gpu_info/gpu_params/gpu_memory_info.i"
 	@echo "... src/gpu_info/gpu_params/gpu_memory_info.s"
+	@echo "... src/gpu_info/gpu_params/gpu_other_params.o"
+	@echo "... src/gpu_info/gpu_params/gpu_other_params.i"
+	@echo "... src/gpu_info/gpu_params/gpu_other_params.s"
 	@echo "... src/gpu_info/gpu_params/gpu_thermal_value.o"
 	@echo "... src/gpu_info/gpu_params/gpu_thermal_value.i"
 	@echo "... src/gpu_info/gpu_params/gpu_thermal_value.s"

@@ -20,7 +20,7 @@ std::vector<unsigned long long> get_gpu_VRAM_info() {
     printf("ERROR info : '%s'\n", nvmlErrorString(memory_result));
     return {};
   }
-  float VRAM_memory_percentage_usage = 100 * ((float)memory.used / (float)memory.total);
+  float VRAM_memory_percentage_usage             = 100 * ((float)memory.used / (float)memory.total);
   unsigned long long total_VRAM_installed_MiB    =     (memory.total / 1024 / 1024);
   unsigned long long total_VRAM_used_MiB         =     (memory.used / 1024 / 1024);
   unsigned long long total_VRAM_free_MiB         =     (memory.free / 1204 / 1024);

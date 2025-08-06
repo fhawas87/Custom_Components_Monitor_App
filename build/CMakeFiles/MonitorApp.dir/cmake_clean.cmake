@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_model.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_memory_info.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_memory_info.cpp.o.d"
+  "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_other_params.cpp.o"
+  "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_other_params.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_thermal_value.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_thermal_value.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.o"

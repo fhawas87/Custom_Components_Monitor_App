@@ -29,6 +29,7 @@ set(SRC
   src/gpu_info/gpu_params/gpu_thermal_value.cpp
   src/gpu_info/gpu_params/gpu_usage.cpp
   src/gpu_info/gpu_params/gpu_memory_info.cpp
+  src/gpu_info/gpu_params/gpu_other_params.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC})
