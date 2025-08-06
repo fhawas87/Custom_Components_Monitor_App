@@ -1,0 +1,3 @@
+/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles/MonitorApp.dir
+/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles/edit_cache.dir
+/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles/rebuild_cache.dir
