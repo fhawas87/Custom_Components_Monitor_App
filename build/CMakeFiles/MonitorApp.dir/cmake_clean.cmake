@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o.d"
+  "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o"
+  "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_model.cpp.o"

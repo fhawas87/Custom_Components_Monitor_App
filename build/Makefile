@@ -177,6 +177,30 @@ src/cpu_info/cpu_params/cpu_thermal_info.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.s
 .PHONY : src/cpu_info/cpu_params/cpu_thermal_info.cpp.s
 
+src/cpu_info/cpu_params/cpu_utilization.o: src/cpu_info/cpu_params/cpu_utilization.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_utilization.o
+
+# target to build an object file
+src/cpu_info/cpu_params/cpu_utilization.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_utilization.cpp.o
+
+src/cpu_info/cpu_params/cpu_utilization.i: src/cpu_info/cpu_params/cpu_utilization.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_utilization.i
+
+# target to preprocess a source file
+src/cpu_info/cpu_params/cpu_utilization.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_utilization.cpp.i
+
+src/cpu_info/cpu_params/cpu_utilization.s: src/cpu_info/cpu_params/cpu_utilization.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_utilization.s
+
+# target to generate assembly for a file
+src/cpu_info/cpu_params/cpu_utilization.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_utilization.cpp.s
+
 src/gpu_info/gpu_model/gpu_device.o: src/gpu_info/gpu_model/gpu_device.cpp.o
 .PHONY : src/gpu_info/gpu_model/gpu_device.o
 
@@ -360,6 +384,9 @@ help:
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.o"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.i"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.s"
+	@echo "... src/cpu_info/cpu_params/cpu_utilization.o"
+	@echo "... src/cpu_info/cpu_params/cpu_utilization.i"
+	@echo "... src/cpu_info/cpu_params/cpu_utilization.s"
 	@echo "... src/gpu_info/gpu_model/gpu_device.o"
 	@echo "... src/gpu_info/gpu_model/gpu_device.i"
 	@echo "... src/gpu_info/gpu_model/gpu_device.s"

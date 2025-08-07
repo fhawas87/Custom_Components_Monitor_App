@@ -53,6 +53,7 @@ set(SRC
   # cpu functions
   src/cpu_info/cpu_params/cpu_thermal_info.cpp
   src/cpu_info/cpu_params/cpu_freq_info.cpp
+  src/cpu_info/cpu_params/cpu_utilization.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC})

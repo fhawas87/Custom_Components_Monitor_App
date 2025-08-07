@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_freq_info.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_thermal_info.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o.d"
+  "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_utilization.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/gpu_info/gpu_model/gpu_device.cpp" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/gpu_info/gpu_model/gpu_model.cpp" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_model.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_model.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/gpu_info/gpu_params/gpu_memory_info.cpp" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_memory_info.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_memory_info.cpp.o.d"

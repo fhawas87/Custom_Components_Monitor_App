@@ -91,6 +91,7 @@ void cpu_info() {
   std::vector<double> cpu_cores_temperatures = get_cpu_cores_temperatures();
   size_t number_of_cores = cpu_cores_temperatures.size();
   std::vector<unsigned int> cpu_cores_frequencies = get_cpu_cores_frequencies(number_of_cores);
+  double cpu_utilization_percentage_value = get_cpu_utilization();
 
   if (cpu_cores_temperatures.empty()) {
 
@@ -99,6 +100,8 @@ void cpu_info() {
   //                                    TEST PRINT
   // <------------------------------------------------------------------------>
   
+  printf("\nCPU utilization : %0.f%%\n", cpu_utilization_percentage_value);
+
   for (int core = 0; core < cpu_cores_temperatures.size(); core++) {
 
     printf("Core %d : %0.f C   %d mHz\n", core, cpu_cores_temperatures.at(core), cpu_cores_frequencies.at(core));
