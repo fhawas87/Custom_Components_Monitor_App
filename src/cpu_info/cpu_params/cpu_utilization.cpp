@@ -23,6 +23,9 @@ cpu_proc_stats fill_struct_of_cpu_stats() {
   FILE *cpu_stats_file_info = fopen("/proc/stat", "r");
   if (!cpu_stats_file_info) {
     printf("Something wrong with the path !\n");
+    fclose(cpu_stats_file_info);
+
+    return {};
   }
     
   cpu_proc_stats proc_info_stat_read;

@@ -153,6 +153,30 @@ src/cpu_info/cpu_params/cpu_freq_info.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.s
 .PHONY : src/cpu_info/cpu_params/cpu_freq_info.cpp.s
 
+src/cpu_info/cpu_params/cpu_model_name.o: src/cpu_info/cpu_params/cpu_model_name.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_model_name.o
+
+# target to build an object file
+src/cpu_info/cpu_params/cpu_model_name.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_model_name.cpp.o
+
+src/cpu_info/cpu_params/cpu_model_name.i: src/cpu_info/cpu_params/cpu_model_name.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_model_name.i
+
+# target to preprocess a source file
+src/cpu_info/cpu_params/cpu_model_name.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_model_name.cpp.i
+
+src/cpu_info/cpu_params/cpu_model_name.s: src/cpu_info/cpu_params/cpu_model_name.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_model_name.s
+
+# target to generate assembly for a file
+src/cpu_info/cpu_params/cpu_model_name.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_model_name.cpp.s
+
 src/cpu_info/cpu_params/cpu_thermal_info.o: src/cpu_info/cpu_params/cpu_thermal_info.cpp.o
 .PHONY : src/cpu_info/cpu_params/cpu_thermal_info.o
 
@@ -381,6 +405,9 @@ help:
 	@echo "... src/cpu_info/cpu_params/cpu_freq_info.o"
 	@echo "... src/cpu_info/cpu_params/cpu_freq_info.i"
 	@echo "... src/cpu_info/cpu_params/cpu_freq_info.s"
+	@echo "... src/cpu_info/cpu_params/cpu_model_name.o"
+	@echo "... src/cpu_info/cpu_params/cpu_model_name.i"
+	@echo "... src/cpu_info/cpu_params/cpu_model_name.s"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.o"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.i"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.s"

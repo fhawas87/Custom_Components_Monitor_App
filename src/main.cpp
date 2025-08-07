@@ -18,10 +18,10 @@
 bool has_initialization_suceed = false;
 
 
-void gpu_info() {
+void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result) {
   
-  nvmlReturn_t initialize_result;
-  initialize_result = nvmlInit_v2();
+  //nvmlReturn_t initialize_result;
+  //initialize_result = nvmlInit_v2();
 
   if (initialize_result == NVML_SUCCESS) {
     has_initialization_suceed = true;
@@ -31,7 +31,7 @@ void gpu_info() {
 
 
     std::vector<unsigned long long>       gpu_VRAM_memory_info                       = get_gpu_VRAM_info();
-    std::string                           gpu_device_name                            = get_accessible_device_name();
+    //std::string                           gpu_device_name                            = get_accessible_device_name();
 
     unsigned int                          current_gpu_temp                           = get_current_gpu_temperature();
     unsigned int                          current_gpu_core_usage                     = get_core_utilization_percentage_rate();
@@ -46,10 +46,10 @@ void gpu_info() {
     
 //                                  TEST PRINT
 // <------------------------------------------------------------------------------>
-    for (int i = 0; i < gpu_device_name.length(); i++) {
-      printf("%c", gpu_device_name[i]);
-    }
-
+    //for (int i = 0; i < gpu_device_name.length(); i++) {
+    //  printf("%c", gpu_device_name[i]);
+    //}
+    printf("%s\n", gpu_model_name.c_str());
     printf("\n");
     printf("Temperature            : %d C\n", current_gpu_temp);
     printf("GPU Core usage         : %d %%\n", current_gpu_core_usage);
@@ -60,7 +60,8 @@ void gpu_info() {
     printf("GPU clock frequency    : %d MHz\n", current_gpu_clock_freq);
     printf("GPU fan speed          : %d RPM\n", current_gpu_fan_speed);
     printf("GPU power usage        : %d W\n", current_gpu_power_usage);
-
+    
+    gpu_VRAM_memory_info.clear();
   }
   else {
     if (initialize_result == NVML_ERROR_DRIVER_NOT_LOADED) {
@@ -82,16 +83,16 @@ void gpu_info() {
   nvmlShutdown();
 }
 
-void cpu_info() {
+void cpu_info(const std::string& cpu_model_name) {
   
   if (sensors_init(NULL) != 0) {
     printf("INITIALIZING ERROR !\n");
   }
 
-  std::vector<double> cpu_cores_temperatures = get_cpu_cores_temperatures();
-  size_t number_of_cores = cpu_cores_temperatures.size();
-  std::vector<unsigned int> cpu_cores_frequencies = get_cpu_cores_frequencies(number_of_cores);
-  double cpu_utilization_percentage_value = get_cpu_utilization();
+  std::vector<double>                     cpu_cores_temperatures                     = get_cpu_cores_temperatures();
+  size_t                                  number_of_cores                            = cpu_cores_temperatures.size();
+  std::vector<unsigned int>               cpu_cores_frequencies                      = get_cpu_cores_frequencies(number_of_cores);
+  double                                  cpu_utilization_percentage_value           = get_cpu_utilization();
 
   if (cpu_cores_temperatures.empty()) {
 
@@ -99,7 +100,7 @@ void cpu_info() {
   }
   //                                    TEST PRINT
   // <------------------------------------------------------------------------>
-  
+  printf("\n%s\n", cpu_model_name.c_str());
   printf("\nCPU utilization : %0.f%%\n", cpu_utilization_percentage_value);
 
   for (int core = 0; core < cpu_cores_temperatures.size(); core++) {
@@ -108,13 +109,20 @@ void cpu_info() {
   }
 
   cpu_cores_temperatures.clear();
+  cpu_cores_frequencies.clear();
   sensors_cleanup();
 }
 
 int main() {
   
-  gpu_info();
-  cpu_info();
+  nvmlReturn_t initialize_result;
+  initialize_result = nvmlInit_v2();
+
+  std::string gpu_model_name = get_accessible_device_name();
+  std::string cpu_model_name = get_cpu_model_name();
+  
+  gpu_info(gpu_model_name, initialize_result);
+  cpu_info(cpu_model_name);
 
   if (!has_initialization_suceed) {
     return 1;

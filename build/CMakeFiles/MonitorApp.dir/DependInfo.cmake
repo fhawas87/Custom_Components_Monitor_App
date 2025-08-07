@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_freq_info.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o.d"
+  "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_model_name.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_thermal_info.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_utilization.cpp" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/gpu_info/gpu_model/gpu_device.cpp" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o.d"
