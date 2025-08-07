@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o"
+  "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o.d"
+  "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o"
+  "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_device.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_model/gpu_model.cpp.o"
@@ -11,8 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_thermal_value.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.o.d"
-  "CMakeFiles/MonitorApp.dir/src/gpu_info/main.cpp.o"
-  "CMakeFiles/MonitorApp.dir/src/gpu_info/main.cpp.o.d"
+  "CMakeFiles/MonitorApp.dir/src/main.cpp.o"
+  "CMakeFiles/MonitorApp.dir/src/main.cpp.o.d"
   "MonitorApp"
   "MonitorApp.pdb"
 )

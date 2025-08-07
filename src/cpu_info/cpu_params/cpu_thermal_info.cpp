@@ -7,12 +7,6 @@
 #include <sensors/sensors.h>
 
 std::vector<double> get_cpu_cores_temperatures() {
-
-  if (sensors_init(NULL) != 0) {
-    printf("INITIALIZING ERROR\n");
-    return {};
-  }
-
   std::vector<double> cpu_cores_temp;
   int chip_index = 0;
   const sensors_chip_name* chip_name;
@@ -31,9 +25,8 @@ std::vector<double> get_cpu_cores_temperatures() {
 
       char* label = sensors_get_label(chip_name, feature);
       bool is_core = label && std::strstr(label, "Core");
-      free(label);
+      free(label); // according to libsensors official documentation, have to free the label
       if (!is_core) { continue; }
-      //if (std::strstr(feature->name, "Core") == nullptr) { continue; }
 
       const sensors_subfeature* sub_feature = sensors_get_subfeature(chip_name, feature, SENSORS_SUBFEATURE_TEMP_INPUT);
       if (!sub_feature) { continue; }
@@ -47,25 +40,5 @@ std::vector<double> get_cpu_cores_temperatures() {
     break;
   }
 
-  sensors_cleanup();
-
   return cpu_cores_temp;
-}
-
-int main() {
-
-  std::vector<double> cpu_cores_temp = get_cpu_cores_temperatures();
-
-  if (cpu_cores_temp.empty()) {
-    printf("Error while reading temps from cores\n");
-    return 1;
-  }
- 
-  for (int core = 0; core < cpu_cores_temp.size(); core++) {
-    printf("Core %d : %1.f C\n", core, cpu_cores_temp.at(core));
-  }
-  
-  cpu_cores_temp.clear();
-
-  return 0;
 }

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/kuba/c/Monitor/Monitor_Source/src/gpu_info
+CXX_INCLUDES = -I/home/kuba/c/Monitor/Monitor_Source/src/gpu_info -I/home/kuba/c/Monitor/Monitor_Source/src/cpu_info
 
 CXX_FLAGS = -std=gnu++17
 

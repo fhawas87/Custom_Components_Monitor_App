@@ -129,6 +129,54 @@ MonitorApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/build
 .PHONY : MonitorApp/fast
 
+src/cpu_info/cpu_params/cpu_freq_info.o: src/cpu_info/cpu_params/cpu_freq_info.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_freq_info.o
+
+# target to build an object file
+src/cpu_info/cpu_params/cpu_freq_info.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_freq_info.cpp.o
+
+src/cpu_info/cpu_params/cpu_freq_info.i: src/cpu_info/cpu_params/cpu_freq_info.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_freq_info.i
+
+# target to preprocess a source file
+src/cpu_info/cpu_params/cpu_freq_info.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_freq_info.cpp.i
+
+src/cpu_info/cpu_params/cpu_freq_info.s: src/cpu_info/cpu_params/cpu_freq_info.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_freq_info.s
+
+# target to generate assembly for a file
+src/cpu_info/cpu_params/cpu_freq_info.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_freq_info.cpp.s
+
+src/cpu_info/cpu_params/cpu_thermal_info.o: src/cpu_info/cpu_params/cpu_thermal_info.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_thermal_info.o
+
+# target to build an object file
+src/cpu_info/cpu_params/cpu_thermal_info.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o
+.PHONY : src/cpu_info/cpu_params/cpu_thermal_info.cpp.o
+
+src/cpu_info/cpu_params/cpu_thermal_info.i: src/cpu_info/cpu_params/cpu_thermal_info.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_thermal_info.i
+
+# target to preprocess a source file
+src/cpu_info/cpu_params/cpu_thermal_info.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.i
+.PHONY : src/cpu_info/cpu_params/cpu_thermal_info.cpp.i
+
+src/cpu_info/cpu_params/cpu_thermal_info.s: src/cpu_info/cpu_params/cpu_thermal_info.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_thermal_info.s
+
+# target to generate assembly for a file
+src/cpu_info/cpu_params/cpu_thermal_info.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.s
+.PHONY : src/cpu_info/cpu_params/cpu_thermal_info.cpp.s
+
 src/gpu_info/gpu_model/gpu_device.o: src/gpu_info/gpu_model/gpu_device.cpp.o
 .PHONY : src/gpu_info/gpu_model/gpu_device.o
 
@@ -273,29 +321,29 @@ src/gpu_info/gpu_params/gpu_usage.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.s
 .PHONY : src/gpu_info/gpu_params/gpu_usage.cpp.s
 
-src/gpu_info/main.o: src/gpu_info/main.cpp.o
-.PHONY : src/gpu_info/main.o
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
 
 # target to build an object file
-src/gpu_info/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/main.cpp.o
-.PHONY : src/gpu_info/main.cpp.o
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-src/gpu_info/main.i: src/gpu_info/main.cpp.i
-.PHONY : src/gpu_info/main.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-src/gpu_info/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/main.cpp.i
-.PHONY : src/gpu_info/main.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-src/gpu_info/main.s: src/gpu_info/main.cpp.s
-.PHONY : src/gpu_info/main.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-src/gpu_info/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/gpu_info/main.cpp.s
-.PHONY : src/gpu_info/main.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -306,6 +354,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MonitorApp"
+	@echo "... src/cpu_info/cpu_params/cpu_freq_info.o"
+	@echo "... src/cpu_info/cpu_params/cpu_freq_info.i"
+	@echo "... src/cpu_info/cpu_params/cpu_freq_info.s"
+	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.o"
+	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.i"
+	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.s"
 	@echo "... src/gpu_info/gpu_model/gpu_device.o"
 	@echo "... src/gpu_info/gpu_model/gpu_device.i"
 	@echo "... src/gpu_info/gpu_model/gpu_device.s"
@@ -324,9 +378,9 @@ help:
 	@echo "... src/gpu_info/gpu_params/gpu_usage.o"
 	@echo "... src/gpu_info/gpu_params/gpu_usage.i"
 	@echo "... src/gpu_info/gpu_params/gpu_usage.s"
-	@echo "... src/gpu_info/main.o"
-	@echo "... src/gpu_info/main.i"
-	@echo "... src/gpu_info/main.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 
