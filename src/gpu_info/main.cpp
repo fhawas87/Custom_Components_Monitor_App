@@ -8,8 +8,7 @@
 #include "gpu_model/gpu_model.h"
 #include "gpu_params/gpu_params.h"
 
-// trying to initialize nvml
-// check for errors or success
+
 
 bool has_initialization_suceed = false;
 
@@ -37,7 +36,6 @@ void try_to_initialize() {
     unsigned long long                    total_VRAM_installed_MiB                   = gpu_VRAM_memory_info.at(0);
     unsigned long long                    current_VRAM_used_MiB                      = gpu_VRAM_memory_info.at(1);
     unsigned long long                    current_VRAM_free_MiB                      = gpu_VRAM_memory_info.at(2);
-
     float                                 current_VRAM_memory_usage                  = gpu_VRAM_memory_info.at(3);
     
 

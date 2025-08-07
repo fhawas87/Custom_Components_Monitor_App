@@ -1,6 +1,6 @@
 #pragma once
 
-#include <nvml.h>
+
 #include <vector>
 
 unsigned int                get_current_gpu_temperature();
