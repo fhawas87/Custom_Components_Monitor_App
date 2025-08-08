@@ -3,6 +3,6 @@ First demo console vizualization ( only two fans are visible because :
      2) something is wrong with my msi chips ) 
 
 <p align="right">
-  <img src="Screenshots/Console_Demo_Screenshot.png" alt="FIRST DEMO SS" width="400">
+  <img src="Screenshots/Console_Demo_Screenshot.png" alt="FIRST DEMO SS" width="200">
 </p>
 
