@@ -48,7 +48,7 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     //}
     printf("%s\n", gpu_model_name.c_str());
     printf("\n");
-    printf("Temperature            : %d C\n", current_gpu_temp);
+    printf("Temperature            : %d°C\n", current_gpu_temp);
     printf("GPU Core usage         : %d %%\n", current_gpu_core_usage);
     printf("VRAM memory usage      : %0.f %%\n", current_VRAM_memory_usage);
     printf("Total VRAM installed   : %d MiB\n", total_VRAM_installed_MiB);
@@ -97,7 +97,7 @@ void cpu_info(const std::string& cpu_model_name) {
 
   for (int core = 0; core < cpu_cores_temperatures.size(); core++) {
 
-    printf("Core %d                 : %0.f C   %d MHz\n", core, cpu_cores_temperatures.at(core), cpu_cores_frequencies.at(core));
+    printf("Core %d                 : %0.f°C   %d MHz\n", core, cpu_cores_temperatures.at(core), cpu_cores_frequencies.at(core));
   }
 
   cpu_cores_temperatures.clear();
