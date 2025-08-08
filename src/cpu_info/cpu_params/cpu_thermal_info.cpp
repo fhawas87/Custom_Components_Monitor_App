@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include <string>
-#include <cstring>
-#include <stdlib.h>
+#include <string.h> // strncmp()
+#include <stdlib.h> // free()
 #include <vector>
 
 #include <sensors/sensors.h>
+
 
 std::vector<double> get_cpu_cores_temperatures() {
   std::vector<double> cpu_cores_temp;
@@ -14,7 +14,7 @@ std::vector<double> get_cpu_cores_temperatures() {
 
   while ((chip_name = sensors_get_detected_chips(NULL, &chip_index)) != NULL) {
     sensors_snprintf_chip_name(chip_buffer, sizeof(chip_buffer), chip_name);
-    if (std::strcmp(chip_buffer, "coretemp-isa-0000") != 0) {
+    if (strncmp(chip_buffer, "coretemp-isa-0000", 17) != 0) {
       continue;
     }
     int feature_index = 0;
@@ -24,10 +24,9 @@ std::vector<double> get_cpu_cores_temperatures() {
       if (feature->type != SENSORS_FEATURE_TEMP) { continue; }
 
       char* label = sensors_get_label(chip_name, feature);
-      bool is_core = label && std::strstr(label, "Core");
-      free(label); // according to libsensors official documentation, have to free the label
-      if (!is_core) { continue; }
-
+      if (strncmp(label, "Package", 7) == 0) { free(label); continue ;}
+      free(label);
+  
       const sensors_subfeature* sub_feature = sensors_get_subfeature(chip_name, feature, SENSORS_SUBFEATURE_TEMP_INPUT);
       if (!sub_feature) { continue; }
 
@@ -42,3 +41,4 @@ std::vector<double> get_cpu_cores_temperatures() {
 
   return cpu_cores_temp;
 }
+

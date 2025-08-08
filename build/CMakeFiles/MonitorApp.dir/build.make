@@ -209,19 +209,19 @@ CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_utilization.cpp -o CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.s
 
-CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o: CMakeFiles/MonitorApp.dir/flags.make
-CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o: /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_model_name.cpp
-CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o: CMakeFiles/MonitorApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o -MF CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o.d -o CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o -c /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_model_name.cpp
+CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o: CMakeFiles/MonitorApp.dir/flags.make
+CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o: /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_model/cpu_model_name.cpp
+CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o: CMakeFiles/MonitorApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o -MF CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o.d -o CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o -c /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_model/cpu_model_name.cpp
 
-CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_model_name.cpp > CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.i
+CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_model/cpu_model_name.cpp > CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.i
 
-CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_params/cpu_model_name.cpp -o CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.s
+CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuba/c/Monitor/Monitor_Source/src/cpu_info/cpu_model/cpu_model_name.cpp -o CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.s
 
 CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o: CMakeFiles/MonitorApp.dir/flags.make
 CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o: /home/kuba/c/Monitor/Monitor_Source/src/ram_info/ram_usage.cpp
@@ -237,6 +237,20 @@ CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuba/c/Monitor/Monitor_Source/src/ram_info/ram_usage.cpp -o CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.s
 
+CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o: CMakeFiles/MonitorApp.dir/flags.make
+CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o: /home/kuba/c/Monitor/Monitor_Source/src/fan_info/available_fans_tach_info.cpp
+CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o: CMakeFiles/MonitorApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o -MF CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o.d -o CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o -c /home/kuba/c/Monitor/Monitor_Source/src/fan_info/available_fans_tach_info.cpp
+
+CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuba/c/Monitor/Monitor_Source/src/fan_info/available_fans_tach_info.cpp > CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.i
+
+CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuba/c/Monitor/Monitor_Source/src/fan_info/available_fans_tach_info.cpp -o CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.s
+
 # Object files for target MonitorApp
 MonitorApp_OBJECTS = \
 "CMakeFiles/MonitorApp.dir/src/main.cpp.o" \
@@ -249,8 +263,9 @@ MonitorApp_OBJECTS = \
 "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o" \
 "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o" \
 "CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o" \
-"CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o" \
-"CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o"
+"CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o" \
+"CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o" \
+"CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o"
 
 # External object files for target MonitorApp
 MonitorApp_EXTERNAL_OBJECTS =
@@ -265,13 +280,14 @@ MonitorApp: CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_other_params.c
 MonitorApp: CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_thermal_info.cpp.o
 MonitorApp: CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.o
 MonitorApp: CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.o
-MonitorApp: CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o
+MonitorApp: CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o
 MonitorApp: CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o
+MonitorApp: CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o
 MonitorApp: CMakeFiles/MonitorApp.dir/build.make
 MonitorApp: /usr/lib/x86_64-linux-gnu/libnvidia-ml.so
 MonitorApp: /usr/lib/x86_64-linux-gnu/libsensors.so
 MonitorApp: CMakeFiles/MonitorApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable MonitorApp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kuba/c/Monitor/Monitor_Source/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable MonitorApp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MonitorApp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

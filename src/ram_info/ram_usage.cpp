@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <fstream>
-#include <string.h>
+//#include <string.h>
+#include <cstring>
 
 
 unsigned int get_ram_memory_usage() {

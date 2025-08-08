@@ -129,6 +129,30 @@ MonitorApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/build
 .PHONY : MonitorApp/fast
 
+src/cpu_info/cpu_model/cpu_model_name.o: src/cpu_info/cpu_model/cpu_model_name.cpp.o
+.PHONY : src/cpu_info/cpu_model/cpu_model_name.o
+
+# target to build an object file
+src/cpu_info/cpu_model/cpu_model_name.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.o
+.PHONY : src/cpu_info/cpu_model/cpu_model_name.cpp.o
+
+src/cpu_info/cpu_model/cpu_model_name.i: src/cpu_info/cpu_model/cpu_model_name.cpp.i
+.PHONY : src/cpu_info/cpu_model/cpu_model_name.i
+
+# target to preprocess a source file
+src/cpu_info/cpu_model/cpu_model_name.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.i
+.PHONY : src/cpu_info/cpu_model/cpu_model_name.cpp.i
+
+src/cpu_info/cpu_model/cpu_model_name.s: src/cpu_info/cpu_model/cpu_model_name.cpp.s
+.PHONY : src/cpu_info/cpu_model/cpu_model_name.s
+
+# target to generate assembly for a file
+src/cpu_info/cpu_model/cpu_model_name.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_model/cpu_model_name.cpp.s
+.PHONY : src/cpu_info/cpu_model/cpu_model_name.cpp.s
+
 src/cpu_info/cpu_params/cpu_freq_info.o: src/cpu_info/cpu_params/cpu_freq_info.cpp.o
 .PHONY : src/cpu_info/cpu_params/cpu_freq_info.o
 
@@ -152,30 +176,6 @@ src/cpu_info/cpu_params/cpu_freq_info.s: src/cpu_info/cpu_params/cpu_freq_info.c
 src/cpu_info/cpu_params/cpu_freq_info.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_freq_info.cpp.s
 .PHONY : src/cpu_info/cpu_params/cpu_freq_info.cpp.s
-
-src/cpu_info/cpu_params/cpu_model_name.o: src/cpu_info/cpu_params/cpu_model_name.cpp.o
-.PHONY : src/cpu_info/cpu_params/cpu_model_name.o
-
-# target to build an object file
-src/cpu_info/cpu_params/cpu_model_name.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.o
-.PHONY : src/cpu_info/cpu_params/cpu_model_name.cpp.o
-
-src/cpu_info/cpu_params/cpu_model_name.i: src/cpu_info/cpu_params/cpu_model_name.cpp.i
-.PHONY : src/cpu_info/cpu_params/cpu_model_name.i
-
-# target to preprocess a source file
-src/cpu_info/cpu_params/cpu_model_name.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.i
-.PHONY : src/cpu_info/cpu_params/cpu_model_name.cpp.i
-
-src/cpu_info/cpu_params/cpu_model_name.s: src/cpu_info/cpu_params/cpu_model_name.cpp.s
-.PHONY : src/cpu_info/cpu_params/cpu_model_name.s
-
-# target to generate assembly for a file
-src/cpu_info/cpu_params/cpu_model_name.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_model_name.cpp.s
-.PHONY : src/cpu_info/cpu_params/cpu_model_name.cpp.s
 
 src/cpu_info/cpu_params/cpu_thermal_info.o: src/cpu_info/cpu_params/cpu_thermal_info.cpp.o
 .PHONY : src/cpu_info/cpu_params/cpu_thermal_info.o
@@ -224,6 +224,30 @@ src/cpu_info/cpu_params/cpu_utilization.s: src/cpu_info/cpu_params/cpu_utilizati
 src/cpu_info/cpu_params/cpu_utilization.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/cpu_info/cpu_params/cpu_utilization.cpp.s
 .PHONY : src/cpu_info/cpu_params/cpu_utilization.cpp.s
+
+src/fan_info/available_fans_tach_info.o: src/fan_info/available_fans_tach_info.cpp.o
+.PHONY : src/fan_info/available_fans_tach_info.o
+
+# target to build an object file
+src/fan_info/available_fans_tach_info.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.o
+.PHONY : src/fan_info/available_fans_tach_info.cpp.o
+
+src/fan_info/available_fans_tach_info.i: src/fan_info/available_fans_tach_info.cpp.i
+.PHONY : src/fan_info/available_fans_tach_info.i
+
+# target to preprocess a source file
+src/fan_info/available_fans_tach_info.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.i
+.PHONY : src/fan_info/available_fans_tach_info.cpp.i
+
+src/fan_info/available_fans_tach_info.s: src/fan_info/available_fans_tach_info.cpp.s
+.PHONY : src/fan_info/available_fans_tach_info.s
+
+# target to generate assembly for a file
+src/fan_info/available_fans_tach_info.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/fan_info/available_fans_tach_info.cpp.s
+.PHONY : src/fan_info/available_fans_tach_info.cpp.s
 
 src/gpu_info/gpu_model/gpu_device.o: src/gpu_info/gpu_model/gpu_device.cpp.o
 .PHONY : src/gpu_info/gpu_model/gpu_device.o
@@ -426,18 +450,21 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MonitorApp"
+	@echo "... src/cpu_info/cpu_model/cpu_model_name.o"
+	@echo "... src/cpu_info/cpu_model/cpu_model_name.i"
+	@echo "... src/cpu_info/cpu_model/cpu_model_name.s"
 	@echo "... src/cpu_info/cpu_params/cpu_freq_info.o"
 	@echo "... src/cpu_info/cpu_params/cpu_freq_info.i"
 	@echo "... src/cpu_info/cpu_params/cpu_freq_info.s"
-	@echo "... src/cpu_info/cpu_params/cpu_model_name.o"
-	@echo "... src/cpu_info/cpu_params/cpu_model_name.i"
-	@echo "... src/cpu_info/cpu_params/cpu_model_name.s"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.o"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.i"
 	@echo "... src/cpu_info/cpu_params/cpu_thermal_info.s"
 	@echo "... src/cpu_info/cpu_params/cpu_utilization.o"
 	@echo "... src/cpu_info/cpu_params/cpu_utilization.i"
 	@echo "... src/cpu_info/cpu_params/cpu_utilization.s"
+	@echo "... src/fan_info/available_fans_tach_info.o"
+	@echo "... src/fan_info/available_fans_tach_info.i"
+	@echo "... src/fan_info/available_fans_tach_info.s"
 	@echo "... src/gpu_info/gpu_model/gpu_device.o"
 	@echo "... src/gpu_info/gpu_model/gpu_device.i"
 	@echo "... src/gpu_info/gpu_model/gpu_device.s"

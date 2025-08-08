@@ -33,13 +33,14 @@ find_library(LIBSENSORS_LIBRARY
 )
 
 
-include_directories(
-  ${NVML_INCLUDE_DIRS}
-  ${LIBSENSORS_INCLUCDE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/cpu_info
-  $[CMAKE_CURRENT_SORUCE_DIR]/src/ram_info
-)
+#include_directories(
+#  ${NVML_INCLUDE_DIRS}
+#  ${LIBSENSORS_INCLUCDE_DIR}
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/cpu_info
+#  $[CMAKE_CURRENT_SORUCE_DIR]/src/ram_info
+#  ${CMAKE_CURRENT_SOURCE_DIR}/src/fan_info
+#)
 
 set(SRC
   # int main() function localization
@@ -55,9 +56,11 @@ set(SRC
   src/cpu_info/cpu_params/cpu_thermal_info.cpp
   src/cpu_info/cpu_params/cpu_freq_info.cpp
   src/cpu_info/cpu_params/cpu_utilization.cpp
-  src/cpu_info/cpu_params/cpu_model_name.cpp
+  src/cpu_info/cpu_model/cpu_model_name.cpp
   #ram functions
   src/ram_info/ram_usage.cpp
+  #fan functions
+  src/fan_info/available_fans_tach_info.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC})
@@ -67,6 +70,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
   ${CMAKE_CURRENT_SOURCE_DIR}/src/cpu_info
   ${CMAKE_CURRENT_SOURCE_DIR}/src/ram_info
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/fan_info
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
