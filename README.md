@@ -1,1 +1,1 @@
-![FIRST DEMO SS](Screenshots/nazwa_pliku.png)
+![FIRST DEMO SS](Screenshots/Console_Demo_Screenshot.png)
