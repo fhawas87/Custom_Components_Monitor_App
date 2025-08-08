@@ -1,3 +1,11 @@
 #pragma once
 
-unsigned int get_ram_memory_usage();
+#ifdef __cplusplus
+  extern "C" {
+#endif
+
+unsigned int get_ram_memory_usage(void);
+
+#ifdef __cplusplus
+}
+#endif

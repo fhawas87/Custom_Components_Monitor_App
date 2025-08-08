@@ -13,7 +13,7 @@ unsigned int get_gpu_clock_frequency() {
   nvmlReturn_t core_clock_freq_result = nvmlDeviceGetClockInfo(device, NVML_CLOCK_GRAPHICS, &core_clock_freq);
 
   if (core_clock_freq_result != NVML_SUCCESS) {
-    printf("ERROR code : ( %d )\n", static_cast<int>(core_clock_freq_result));
+    printf("ERROR code : ( %d )\n", (int)core_clock_freq_result);
     printf("ERROR info : '%s'\n", nvmlErrorString(core_clock_freq_result));
     return 1;
   }
@@ -36,14 +36,14 @@ unsigned int get_gpu_fan_speed() {
   nvmlReturn_t fan_speed_max_min_result = nvmlDeviceGetMinMaxFanSpeed(device, &fan_speed_min, &fan_speed_max);
 
   if (fan_speed_result != NVML_SUCCESS || fan_speed_max_min_result != NVML_SUCCESS) {
-    printf("ERROR code : ( %d )\n", static_cast<int>(fan_speed_result));
+    printf("ERROR code : ( %d )\n", (int)fan_speed_result);
     printf("ERROR info : '%s'\n", nvmlErrorString(fan_speed_result));
     return 1;
   }
 
   float fan_speed_RPM = fan_speed_percentage_value * fan_speed_max;
 
-  return static_cast<unsigned int>(fan_speed_RPM);
+  return (unsigned int)fan_speed_RPM;
 }
 
 unsigned int get_gpu_power_usage() {
@@ -53,7 +53,7 @@ unsigned int get_gpu_power_usage() {
   nvmlReturn_t power_usage_result = nvmlDeviceGetPowerUsage(device, &power_usage);
 
   if (power_usage_result != NVML_SUCCESS) {
-    printf("ERROR code : ( %d )\n", static_cast<int>(power_usage_result));
+    printf("ERROR code : ( %d )\n", (int)power_usage_result);
     printf("ERROR info : '%s'\n", nvmlErrorString(power_usage_result));
     return 1;
   }

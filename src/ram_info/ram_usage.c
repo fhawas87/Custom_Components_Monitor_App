@@ -1,10 +1,8 @@
 #include <stdio.h>
-#include <fstream>
-//#include <string.h>
-#include <cstring>
+#include <string.h>
 
 
-unsigned int get_ram_memory_usage() {
+unsigned int get_ram_memory_usage(void) {
 
   FILE *mem_info = fopen("/proc/meminfo", "r");
   if (!mem_info) {
@@ -28,9 +26,9 @@ unsigned int get_ram_memory_usage() {
   }
   fclose(mem_info);
   
-  double total_ram_memory_MiB = static_cast<double>((total_ram_memory_KiB / 1024));
-  double available_ram_memory_MiB = static_cast<double>((available_ram_memory_KiB / 1024));
+  double total_ram_memory_MiB = (double)(total_ram_memory_KiB / 1024);
+  double available_ram_memory_MiB = (double)(available_ram_memory_KiB / 1024);
   double ram_usage_float_value = (total_ram_memory_MiB - available_ram_memory_MiB) / total_ram_memory_MiB * 100;
 
-  return static_cast<unsigned int>(ram_usage_float_value);
+  return (unsigned int)ram_usage_float_value;
 }

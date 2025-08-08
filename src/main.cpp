@@ -48,11 +48,7 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     //}
     printf("------------------------------------------\n");
     printf("%s\n", gpu_model_name.c_str());
-<<<<<<< HEAD
-    printf("\n");
-=======
     printf("------------------------------------------\n");
->>>>>>> 27425b5 (Printing demo changes. Added folder for screenshots)
     printf("Temperature            : %d°C\n", current_gpu_temp);
     printf("GPU Core usage         : %d %%\n", current_gpu_core_usage);
     printf("VRAM memory usage      : %0.f %%\n", current_VRAM_memory_usage);
