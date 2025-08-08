@@ -32,16 +32,6 @@ find_library(LIBSENSORS_LIBRARY
     /usr/local/lib 
 )
 
-
-#include_directories(
-#  ${NVML_INCLUDE_DIRS}
-#  ${LIBSENSORS_INCLUCDE_DIR}
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/cpu_info
-#  $[CMAKE_CURRENT_SORUCE_DIR]/src/ram_info
-#  ${CMAKE_CURRENT_SOURCE_DIR}/src/fan_info
-#)
-
 set(SRC
   # int main() function localization
   src/main.cpp

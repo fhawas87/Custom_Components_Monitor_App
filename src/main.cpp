@@ -46,8 +46,13 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     //for (int i = 0; i < gpu_device_name.length(); i++) {
     //  printf("%c", gpu_device_name[i]);
     //}
+    printf("------------------------------------------\n");
     printf("%s\n", gpu_model_name.c_str());
+<<<<<<< HEAD
     printf("\n");
+=======
+    printf("------------------------------------------\n");
+>>>>>>> 27425b5 (Printing demo changes. Added folder for screenshots)
     printf("Temperature            : %d°C\n", current_gpu_temp);
     printf("GPU Core usage         : %d %%\n", current_gpu_core_usage);
     printf("VRAM memory usage      : %0.f %%\n", current_VRAM_memory_usage);
@@ -92,7 +97,9 @@ void cpu_info(const std::string& cpu_model_name) {
   }
   //                                    TEST PRINT
   // <------------------------------------------------------------------------>
+  printf("-------------------------------------------");
   printf("\n%s\n", cpu_model_name.c_str());
+  printf("-------------------------------------------");
   printf("\nCPU utilization        : %0.f%%\n", cpu_utilization_percentage_value);
 
   for (int core = 0; core < cpu_cores_temperatures.size(); core++) {
@@ -107,21 +114,22 @@ void cpu_info(const std::string& cpu_model_name) {
 void ram_info() {
 
   unsigned int ram_usage = get_ram_memory_usage();
-
-  printf("\nRAM usage              : %d %%\n", ram_usage);
+  printf("-------------------------------------------\n");
+  printf("RAM usage              : %d %%\n", ram_usage);
+  printf("-------------------------------------------");
 }
 
 void fan_info() {
 
   std::vector<double>                     fans_tach_info                             = get_available_fans_speed();
 
-  if (fans_tach_info.size() == 0) { printf("\nEMPTY VECTOR\n") ;}
+  if (fans_tach_info.size() == 0) { printf("\nEMPTY VECTOR\n"); }
 
   for (int fan = 0; fan < fans_tach_info.size(); fan++) {
     if (fans_tach_info.at(fan) == 0) { continue; }
     printf("\nFan %d                  : %0.f RPM", fan, fans_tach_info.at(fan));
   }
-  printf("\n");
+  printf("\n-------------------------------------------\n");
 }
 
 int main() {
