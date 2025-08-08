@@ -9,6 +9,6 @@ unsigned int                get_gpu_clock_frequency();
 unsigned int                get_gpu_fan_speed();
 unsigned int                get_gpu_power_usage();
 
-std::vector<unsigned long long> get_gpu_VRAM_info();
+std::vector<unsigned int>   get_gpu_VRAM_info();
 
 

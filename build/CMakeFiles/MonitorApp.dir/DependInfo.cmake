@@ -19,6 +19,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kuba/c/Monitor/Monitor_Source/src/gpu_info/gpu_params/gpu_thermal_value.cpp" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_thermal_value.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_thermal_value.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/gpu_info/gpu_params/gpu_usage.cpp" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.o.d"
   "/home/kuba/c/Monitor/Monitor_Source/src/main.cpp" "CMakeFiles/MonitorApp.dir/src/main.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/main.cpp.o.d"
+  "/home/kuba/c/Monitor/Monitor_Source/src/ram_info/ram_usage.cpp" "CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o" "gcc" "CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

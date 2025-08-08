@@ -21,6 +21,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MonitorApp.dir/src/gpu_info/gpu_params/gpu_usage.cpp.o.d"
   "CMakeFiles/MonitorApp.dir/src/main.cpp.o"
   "CMakeFiles/MonitorApp.dir/src/main.cpp.o.d"
+  "CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o"
+  "CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o.d"
   "MonitorApp"
   "MonitorApp.pdb"
 )

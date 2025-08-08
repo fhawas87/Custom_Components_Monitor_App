@@ -393,6 +393,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/ram_info/ram_usage.o: src/ram_info/ram_usage.cpp.o
+.PHONY : src/ram_info/ram_usage.o
+
+# target to build an object file
+src/ram_info/ram_usage.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.o
+.PHONY : src/ram_info/ram_usage.cpp.o
+
+src/ram_info/ram_usage.i: src/ram_info/ram_usage.cpp.i
+.PHONY : src/ram_info/ram_usage.i
+
+# target to preprocess a source file
+src/ram_info/ram_usage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.i
+.PHONY : src/ram_info/ram_usage.cpp.i
+
+src/ram_info/ram_usage.s: src/ram_info/ram_usage.cpp.s
+.PHONY : src/ram_info/ram_usage.s
+
+# target to generate assembly for a file
+src/ram_info/ram_usage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonitorApp.dir/build.make CMakeFiles/MonitorApp.dir/src/ram_info/ram_usage.cpp.s
+.PHONY : src/ram_info/ram_usage.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -435,6 +459,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/ram_info/ram_usage.o"
+	@echo "... src/ram_info/ram_usage.i"
+	@echo "... src/ram_info/ram_usage.s"
 .PHONY : help
 
 

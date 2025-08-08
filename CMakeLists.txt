@@ -38,6 +38,7 @@ include_directories(
   ${LIBSENSORS_INCLUCDE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
   ${CMAKE_CURRENT_SOURCE_DIR}/src/cpu_info
+  $[CMAKE_CURRENT_SORUCE_DIR]/src/ram_info
 )
 
 set(SRC
@@ -55,6 +56,8 @@ set(SRC
   src/cpu_info/cpu_params/cpu_freq_info.cpp
   src/cpu_info/cpu_params/cpu_utilization.cpp
   src/cpu_info/cpu_params/cpu_model_name.cpp
+  #ram functions
+  src/ram_info/ram_usage.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC})
@@ -63,6 +66,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   ${NVML_INCLUDE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
   ${CMAKE_CURRENT_SOURCE_DIR}/src/cpu_info
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/ram_info
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE

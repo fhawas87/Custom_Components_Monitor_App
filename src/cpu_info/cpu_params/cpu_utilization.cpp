@@ -27,7 +27,7 @@ cpu_proc_stats fill_struct_of_cpu_stats() {
 
     return {};
   }
-    
+
   cpu_proc_stats proc_info_stat_read;
   char stats_buffer[512];
   fgets(stats_buffer, sizeof(stats_buffer), cpu_stats_file_info);
@@ -51,11 +51,15 @@ cpu_proc_stats fill_struct_of_cpu_stats() {
 
 double get_cpu_utilization() {
   
+  // not sure if formula of this cpu utlization calculations is correct
+  // but final result in percentage value looks fine
+
   cpu_proc_stats first_sample = fill_struct_of_cpu_stats();
 
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
   cpu_proc_stats second_sample = fill_struct_of_cpu_stats();
+
   unsigned long long first_sample_sum = first_sample.user    + first_sample.nice + 
                                         first_sample.system  + first_sample.idle +
                                         first_sample.iowait  + first_sample.irq +

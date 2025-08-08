@@ -13,6 +13,9 @@
 //CPU HEADERS
 #include "cpu_params/cpu_params.h"
 
+//RAM HEADERS
+#include "ram_params.h"
+
 
 
 bool has_initialization_suceed = false;
@@ -30,7 +33,7 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     printf("NVML has been properly initialized\n\n"); 
 
 
-    std::vector<unsigned long long>       gpu_VRAM_memory_info                       = get_gpu_VRAM_info();
+    std::vector<unsigned int>             gpu_VRAM_memory_info                       = get_gpu_VRAM_info();
     //std::string                           gpu_device_name                            = get_accessible_device_name();
 
     unsigned int                          current_gpu_temp                           = get_current_gpu_temperature();
@@ -39,9 +42,9 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     unsigned int                          current_gpu_fan_speed                      = get_gpu_fan_speed();
     unsigned int                          current_gpu_power_usage                    = get_gpu_power_usage();
 
-    unsigned long long                    total_VRAM_installed_MiB                   = gpu_VRAM_memory_info.at(0);
-    unsigned long long                    current_VRAM_used_MiB                      = gpu_VRAM_memory_info.at(1);
-    unsigned long long                    current_VRAM_free_MiB                      = gpu_VRAM_memory_info.at(2);
+    unsigned int                          total_VRAM_installed_MiB                   = gpu_VRAM_memory_info.at(0);
+    unsigned int                          current_VRAM_used_MiB                      = gpu_VRAM_memory_info.at(1);
+    unsigned int                          current_VRAM_free_MiB                      = gpu_VRAM_memory_info.at(2);
     float                                 current_VRAM_memory_usage                  = gpu_VRAM_memory_info.at(3);
     
 //                                  TEST PRINT
@@ -54,9 +57,9 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     printf("Temperature            : %d C\n", current_gpu_temp);
     printf("GPU Core usage         : %d %%\n", current_gpu_core_usage);
     printf("VRAM memory usage      : %0.f %%\n", current_VRAM_memory_usage);
-    printf("Total VRAM installed   : %llu MiB\n", total_VRAM_installed_MiB);
-    printf("Total VRAM used        : %llu MiB\n", current_VRAM_used_MiB);
-    printf("Total VRAM free        : %llu MiB\n", current_VRAM_free_MiB);
+    printf("Total VRAM installed   : %d MiB\n", total_VRAM_installed_MiB);
+    printf("Total VRAM used        : %d MiB\n", current_VRAM_used_MiB);
+    printf("Total VRAM free        : %d MiB\n", current_VRAM_free_MiB);
     printf("GPU clock frequency    : %d MHz\n", current_gpu_clock_freq);
     printf("GPU fan speed          : %d RPM\n", current_gpu_fan_speed);
     printf("GPU power usage        : %d W\n", current_gpu_power_usage);
@@ -113,6 +116,13 @@ void cpu_info(const std::string& cpu_model_name) {
   sensors_cleanup();
 }
 
+void ram_info() {
+
+  unsigned int ram_usage = get_ram_memory_usage();
+
+  printf("\n%d %%\n", ram_usage);
+}
+
 int main() {
   
   nvmlReturn_t initialize_result;
@@ -123,6 +133,7 @@ int main() {
   
   gpu_info(gpu_model_name, initialize_result);
   cpu_info(cpu_model_name);
+  ram_info();
 
   if (!has_initialization_suceed) {
     return 1;
