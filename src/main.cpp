@@ -2,25 +2,56 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #include <nvml.h>
 #include <sensors/sensors.h>
 
-// GPU HEADERS
 #include "gpu_model/gpu_model.h"
 #include "gpu_params/gpu_params.h"
-
-//CPU HEADERS
 #include "cpu_model/cpu_model.h"
 #include "cpu_params/cpu_params.h"
-
-//RAM HEADERS
 #include "ram_params.h"
-
-//FAN HEADERS
 #include "fan_params.h"
 
+//#include <GL/gl3w.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
+#include <imgui.h>
+#include <implot.h>
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
+
+
+
+struct gpu_stats {
+
+  unsigned int temp;
+  unsigned int usage;
+  unsigned int freq;
+  unsigned int fan_speed;
+  unsigned int power_usage;
+  std::vector<unsigned int> vram_info;
+  std::string model;
+};
+
+struct cpu_stats {
+
+  std::vector<unsigned int> temps;
+  std::vector<unsigned int> freqs;
+  std::string model;
+  double util;
+
+};
+
+struct other_comps {
+
+  unsigned int ram_usage;
+  std::vector<double> fans_speed;
+};
+
+/*
 void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result) {
   
   if (initialize_result == NVML_SUCCESS) {
@@ -43,9 +74,7 @@ void gpu_info(const std::string& gpu_model_name, nvmlReturn_t initialize_result)
     
 //                                  TEST PRINT
 // <------------------------------------------------------------------------------>
-    //for (int i = 0; i < gpu_device_name.length(); i++) {
-    //  printf("%c", gpu_device_name[i]);
-    //}
+    
     printf("------------------------------------------\n");
     printf("%s\n", gpu_model_name.c_str());
     printf("------------------------------------------\n");
@@ -86,13 +115,14 @@ void cpu_info(const std::string& cpu_model_name) {
   size_t                                  number_of_cores                            = cpu_cores_temperatures.size();
   std::vector<unsigned int>               cpu_cores_frequencies                      = get_cpu_cores_frequencies(number_of_cores);
   double                                  cpu_utilization_percentage_value           = get_cpu_utilization();
-
+  
   if (cpu_cores_temperatures.empty()) {
 
     printf("Problem with reading cpu cores temperatures !\n");
   }
   //                                    TEST PRINT
   // <------------------------------------------------------------------------>
+  
   printf("-------------------------------------------");
   printf("\n%s\n", cpu_model_name.c_str());
   printf("-------------------------------------------");
@@ -102,7 +132,7 @@ void cpu_info(const std::string& cpu_model_name) {
 
     printf("Core %d                 : %0.f°C   %d MHz\n", core, cpu_cores_temperatures.at(core), cpu_cores_frequencies.at(core));
   }
-
+  
   cpu_cores_temperatures.clear();
   cpu_cores_frequencies.clear();
 }
@@ -110,9 +140,11 @@ void cpu_info(const std::string& cpu_model_name) {
 void ram_info() {
 
   unsigned int ram_usage = get_ram_memory_usage();
+  
   printf("-------------------------------------------\n");
   printf("RAM usage              : %d %%\n", ram_usage);
   printf("-------------------------------------------");
+  
 }
 
 void fan_info() {
@@ -120,13 +152,15 @@ void fan_info() {
   std::vector<double>                     fans_tach_info                             = get_available_fans_speed();
 
   if (fans_tach_info.size() == 0) { printf("\nEMPTY VECTOR\n"); }
-
+  
   for (int fan = 0; fan < fans_tach_info.size(); fan++) {
     if (fans_tach_info.at(fan) == 0) { continue; }
     printf("\nFan %d                  : %0.f RPM", fan, fans_tach_info.at(fan));
   }
   printf("\n-------------------------------------------\n");
+  
 }
+*/
 
 int main() {
   
@@ -135,7 +169,74 @@ int main() {
   if (sensors_init(NULL) != 0) {
     printf("\nERROR code : libsensors initialization problem\n");
   }
+  
+  if (!glfwInit()) { return -1; }
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+  GLFWwindow* window = glfwCreateWindow(1200, 700, "TEST", nullptr, nullptr);
+  if (!window) { glfwTerminate(); return -1; }
+  glfwMakeContextCurrent(window);
+  glfwSwapInterval(1);
+
+  //if (gl3wInit() != 0) { return -1; }
+  glewExperimental = GL_TRUE;
+  if (glewInit() != GLEW_OK) { return -1; }
+
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImPlot::CreateContext();
+  ImGui::StyleColorsDark();
+  ImGui_ImplGlfw_InitForOpenGL(window, true);
+  ImGui_ImplOpenGL3_Init("#version 330");
+
+  const int N = 600;
+  std::vector<float> ring(N, 0.0f);
+  int head = 0;
+  double last = glfwGetTime();
+
+  while (!glfwWindowShouldClose(window)) {
+    glfwPollEvents();
+
+    double now = glfwGetTime();
+    if (now - last >= 1.0) {
+      static float t = 0.f;
+      t += 1.f;
+      ring[head] = 50.f + 30.f * std::sin(t * 2.0f);
+      head = (head + 1) % N;
+      last = now;
+    }
+
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    ImGui::Begin("TEST PLOT");
+    ImGui::Text("WORKS");
+    if (ImPlot::BeginPlot("TEST PLOT")) {
+      ImPlot::SetupAxes("t [s]", "%");
+      ImPlot::SetupAxesLimits(0, N, 0, 100, ImGuiCond_Always);
+      //ImPlot::SetNextAxesLimits(0, N, 0, 100, ImGuiCond_Always);
+      ImPlot::PlotLine("mock", ring.data(), N, 1.0, 0.0, head);
+      ImPlot::EndPlot();
+    }
+    ImGui::End();
+    ImGui::Render();
+    int w, h; glfwGetFramebufferSize(window, &w, &h);
+    glViewport(0, 0, w, h);
+    glClearColor(0.10f, 0.10f, 0.12f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    glfwSwapBuffers(window);
+  }
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplGlfw_Shutdown();
+  ImPlot::DestroyContext();
+  ImGui::DestroyContext();
+  glfwDestroyWindow(window);
+  glfwTerminate();
+
+  /*
   std::string gpu_model_name = get_accessible_device_name();
   std::string cpu_model_name = get_cpu_model_name();
   
@@ -143,7 +244,8 @@ int main() {
   cpu_info(cpu_model_name);
   ram_info();
   fan_info();
-  
+  */
+
   nvmlShutdown();
   sensors_cleanup();
 

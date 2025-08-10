@@ -25,29 +25,66 @@ find_library(LIBSENSORS_LIBRARY
   PATHS /usr/lib /usr/lib/x86_64-linux-gnu /usr/local/lib 
 )
 
+find_package(OpenGL REQUIRED)
+#find_package(glfw3 CONFIG QUIET)
+#find_package(GLEW REQUIRED)
+
+if(NOT glfw3_FOUND)
+ find_package(glfw3 REQUIRED)
+endif()
+if(TARGET glfw)
+  set(GLFW_LIB glfw)
+elseif(TARGET glfw3)
+  set(GLFW_LIB glfw3)
+else()
+  message(FATAL_ERROR "ERROR GLFW")
+endif()
+
+find_package(GLEW REQUIRED)
+
 set(SRC
-  # int main() function localization
   src/main.cpp
-  # gpu functions
   src/gpu_info/gpu_model/gpu_model.cpp
   src/gpu_info/gpu_model/gpu_device.c
   src/gpu_info/gpu_params/gpu_thermal_value.c
   src/gpu_info/gpu_params/gpu_usage.c
   src/gpu_info/gpu_params/gpu_memory_info.cpp
   src/gpu_info/gpu_params/gpu_other_params.c
-  # cpu functions
   src/cpu_info/cpu_params/cpu_thermal_info.cpp
   src/cpu_info/cpu_params/cpu_freq_info.cpp
   src/cpu_info/cpu_params/cpu_utilization.cpp
   src/cpu_info/cpu_model/cpu_model_name.cpp
-  #ram functions
   src/ram_info/ram_usage.c
-  #fan functions
   src/fan_info/available_fans_tach_info.cpp
 )
 
+set(EXTERNAL ${CMAKE_CURRENT_SOURCE_DIR}/external)
+set(IMGUI_DIR ${EXTERNAL}/imgui)
+set(IMPLOT_DIR ${EXTERNAL}/implot)
+
+#add_library(gl3w STATIC ${EXTERNAL}/imgui/examples/libs/gl3w/GL/gl3w.c)
+add_library(implot STATIC
+  ${IMPLOT_DIR}/implot.cpp
+  ${IMPLOT_DIR}/implot_items.cpp
+)
+add_library(imgui STATIC
+  ${IMGUI_DIR}/imgui.cpp
+  ${IMGUI_DIR}/imgui_draw.cpp
+  ${IMGUI_DIR}/imgui_tables.cpp
+  ${IMGUI_DIR}/imgui_widgets.cpp
+  ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
+  ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+)
+
+#target_compile_definitions(imgui PUBLIC IMGUI_IMPL_OPENGL_LOADER_GL3W)
+target_compile_definitions(imgui PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLEW)
+
 add_executable(${PROJECT_NAME} ${SRC})
 
+target_include_directories(implot PUBLIC ${IMPLOT_DIR})
+target_link_libraries(implot PUBLIC imgui)
+#target_include_directories(gl3w PUBLIC ${EXTERNAL}/imgui/examples/libs/glfw/include/GLFW/glfw3.h)
+target_include_directories(imgui PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/backends)
 target_include_directories(${PROJECT_NAME} PRIVATE
   ${NVML_INCLUDE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/gpu_info
@@ -57,6 +94,12 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+  imgui
+  implot
+  ${GLFW_LIB}
+  #gl3w
+  GLEW::GLEW
+  OpenGL::GL
   ${NVML_LIBRARY}
   ${LIBSENSORS_LIBRARIES}
   ${LIBSENSORS_LIBRARY}
