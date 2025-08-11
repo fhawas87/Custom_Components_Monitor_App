@@ -22,7 +22,7 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
-#define MAX_SAMPLES_HISTORY 250
+#define MAX_SAMPLES_HISTORY 400
 
 std::vector<float>                              gpu_temp_ring;
 std::vector<float>                              gpu_usage_ring;
@@ -36,7 +36,7 @@ std::vector<std::vector<double>>                cpu_temps_ring;
 std::vector<std::vector<double>>                fans_speed_ring;
 std::vector<std::vector<unsigned int>>          cpu_freqs_ring;
 
-int number_of_cores = 0;
+int number_of_cores;
 int number_of_available_fans = 0;
 
 struct gpu_stats {
@@ -219,7 +219,7 @@ static inline stats get_samples() {
 
   current_stats.cpu.model           =       get_cpu_model_name();                         
   current_stats.cpu.temps           =       get_cpu_cores_temperatures();                                   manage_ring_data_vec_double(cpu_temps_ring, current_stats.cpu.temps);
-  size_t number_of_cores            =       current_stats.cpu.temps.size();
+  size_t number_of_cores                   =       current_stats.cpu.temps.size();
   current_stats.cpu.freqs           =       get_cpu_cores_frequencies(number_of_cores);                     manage_ring_data_vec_int(cpu_freqs_ring, current_stats.cpu.freqs);
   current_stats.cpu.util            =       get_cpu_utilization();                                          manage_ring_data_dec(cpu_util_ring, (float)current_stats.cpu.util);
 
@@ -337,8 +337,8 @@ static inline void draw_ram_chart() {
 }
 /*
 static inline void draw_fan_chart(int &number_of_available_fans) {
-  std::vector<double> current_available_fans_value;
   //current_available_fans_value = fans_speed_ring.back();
+  std::vector<double> current_available_fans_value = fans_speed_ring.back();
   if (ImGui::Begin("FANS SPEED")) {
     if (ImPlot::BeginPlot("speed")) {
       ImPlot::SetupAxes("t[s]", "RPM");
@@ -385,12 +385,12 @@ int main() {
   ImPlot::CreateContext();
   ImGui::StyleColorsDark();
   ImGui_ImplGlfw_InitForOpenGL(window, true);
-  ImGui_ImplOpenGL3_Init("#version 330");
+  ImGui_ImplOpenGL3_Init("#version 410");
   
   double last_time = glfwGetTime();
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
-    
+  
     double current_time = glfwGetTime();
     if (current_time - last_time >= 1.0) {
       stats current_stats = get_samples();
