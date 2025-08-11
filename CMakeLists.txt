@@ -26,8 +26,6 @@ find_library(LIBSENSORS_LIBRARY
 )
 
 find_package(OpenGL REQUIRED)
-#find_package(glfw3 CONFIG QUIET)
-#find_package(GLEW REQUIRED)
 
 if(NOT glfw3_FOUND)
  find_package(glfw3 REQUIRED)
@@ -62,7 +60,6 @@ set(EXTERNAL ${CMAKE_CURRENT_SOURCE_DIR}/external)
 set(IMGUI_DIR ${EXTERNAL}/imgui)
 set(IMPLOT_DIR ${EXTERNAL}/implot)
 
-#add_library(gl3w STATIC ${EXTERNAL}/imgui/examples/libs/gl3w/GL/gl3w.c)
 add_library(implot STATIC
   ${IMPLOT_DIR}/implot.cpp
   ${IMPLOT_DIR}/implot_items.cpp
@@ -76,14 +73,12 @@ add_library(imgui STATIC
   ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
 )
 
-#target_compile_definitions(imgui PUBLIC IMGUI_IMPL_OPENGL_LOADER_GL3W)
 target_compile_definitions(imgui PUBLIC IMGUI_IMPL_OPENGL_LOADER_GLEW)
 
 add_executable(${PROJECT_NAME} ${SRC})
 
 target_include_directories(implot PUBLIC ${IMPLOT_DIR})
 target_link_libraries(implot PUBLIC imgui)
-#target_include_directories(gl3w PUBLIC ${EXTERNAL}/imgui/examples/libs/glfw/include/GLFW/glfw3.h)
 target_include_directories(imgui PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/backends)
 target_include_directories(${PROJECT_NAME} PRIVATE
   ${NVML_INCLUDE_DIR}

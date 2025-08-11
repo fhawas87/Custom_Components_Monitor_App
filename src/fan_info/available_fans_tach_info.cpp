@@ -32,7 +32,9 @@ std::vector<double> get_available_fans_speed() {
 
       double current_fan_speed_RPM = 0;
       if (sensors_get_value(chip_name, sub_feature->number, &current_fan_speed_RPM) == 0) {
-        fan_tach_info.emplace_back(current_fan_speed_RPM);
+        if (current_fan_speed_RPM != 0) { // NEW
+          fan_tach_info.emplace_back(current_fan_speed_RPM);
+        }
       }
     }
 
