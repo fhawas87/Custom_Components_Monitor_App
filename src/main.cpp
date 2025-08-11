@@ -209,22 +209,22 @@ static inline void manage_ring_data_vec_double(std::vector<std::vector<double>> 
 static inline stats get_samples() {
   stats current_stats{};
                      
-  current_stats.gpu.temp            =       get_current_gpu_temperature();                                  manage_ring_data_dec(gpu_temp_ring, (float)current_stats.gpu.temp); 
-  current_stats.gpu.usage           =       get_core_utilization_percentage_rate();                         manage_ring_data_dec(gpu_usage_ring, (float)current_stats.gpu.usage);
-  current_stats.gpu.freq            =       get_gpu_clock_frequency();                                      manage_ring_data_dec(gpu_freq_ring, (float)current_stats.gpu.freq);
-  current_stats.gpu.fan_speed       =       get_gpu_fan_speed();                                            manage_ring_data_dec(gpu_fan_speed_ring, (float)current_stats.gpu.fan_speed);
-  current_stats.gpu.power_usage     =       get_gpu_power_usage();                                          manage_ring_data_dec(gpu_power_usage_ring, (float)current_stats.gpu.power_usage);
-  current_stats.gpu.vram_info       =       get_gpu_VRAM_info();                          
-  current_stats.gpu.vram_usage      =       current_stats.gpu.vram_info.at(3);                              manage_ring_data_dec(gpu_vram_usage_ring, (float)current_stats.gpu.vram_usage);
+  current_stats.gpu.temp            = get_current_gpu_temperature();                    manage_ring_data_dec(gpu_temp_ring, (float)current_stats.gpu.temp); 
+  current_stats.gpu.usage           = get_core_utilization_percentage_rate();           manage_ring_data_dec(gpu_usage_ring, (float)current_stats.gpu.usage);
+  current_stats.gpu.freq            = get_gpu_clock_frequency();                        manage_ring_data_dec(gpu_freq_ring, (float)current_stats.gpu.freq);
+  current_stats.gpu.fan_speed       = get_gpu_fan_speed();                              manage_ring_data_dec(gpu_fan_speed_ring, (float)current_stats.gpu.fan_speed);
+  current_stats.gpu.power_usage     = get_gpu_power_usage();                            manage_ring_data_dec(gpu_power_usage_ring, (float)current_stats.gpu.power_usage);
+  current_stats.gpu.vram_info       = get_gpu_VRAM_info();                          
+  current_stats.gpu.vram_usage      = current_stats.gpu.vram_info.at(3);                manage_ring_data_dec(gpu_vram_usage_ring, (float)current_stats.gpu.vram_usage);
 
-  current_stats.cpu.model           =       get_cpu_model_name();                         
-  current_stats.cpu.temps           =       get_cpu_cores_temperatures();                                   manage_ring_data_vec_double(cpu_temps_ring, current_stats.cpu.temps);
-  size_t number_of_cores                   =       current_stats.cpu.temps.size();
-  current_stats.cpu.freqs           =       get_cpu_cores_frequencies(number_of_cores);                     manage_ring_data_vec_int(cpu_freqs_ring, current_stats.cpu.freqs);
-  current_stats.cpu.util            =       get_cpu_utilization();                                          manage_ring_data_dec(cpu_util_ring, (float)current_stats.cpu.util);
+  current_stats.cpu.model           = get_cpu_model_name();                         
+  current_stats.cpu.temps           = get_cpu_cores_temperatures();                     manage_ring_data_vec_double(cpu_temps_ring, current_stats.cpu.temps);
+  size_t number_of_cores            = current_stats.cpu.temps.size();
+  current_stats.cpu.freqs           = get_cpu_cores_frequencies(number_of_cores);       manage_ring_data_vec_int(cpu_freqs_ring, current_stats.cpu.freqs);
+  current_stats.cpu.util            = get_cpu_utilization();                            manage_ring_data_dec(cpu_util_ring, (float)current_stats.cpu.util);
 
-  current_stats.other.ram_usage     =       get_ram_memory_usage();                                         manage_ring_data_dec(ram_usage_ring, (float)current_stats.other.ram_usage);
-  current_stats.other.fans_speed    =       get_available_fans_speed();                                     manage_ring_data_vec_double(fans_speed_ring, current_stats.other.fans_speed);
+  current_stats.other.ram_usage     = get_ram_memory_usage();                           manage_ring_data_dec(ram_usage_ring, (float)current_stats.other.ram_usage);
+  current_stats.other.fans_speed    = get_available_fans_speed();                       manage_ring_data_vec_double(fans_speed_ring, current_stats.other.fans_speed);
 
   return current_stats;
 }
