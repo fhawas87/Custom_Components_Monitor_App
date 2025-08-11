@@ -275,8 +275,7 @@ static inline void draw_gpu_chart(std::string &gpu_model) {
   ImGui::End();
 }
 
-static inline void draw_cpu_chart(std::string &cpu_model) {
-  /*
+static inline void draw_cpu_chart(std::string &cpu_model) { 
   if (ImGui::Begin(cpu_model.c_str())) {
     if (ImPlot::BeginPlot("usage")) {
       ImPlot::SetupAxes("t[s]", "%");
@@ -286,6 +285,7 @@ static inline void draw_cpu_chart(std::string &cpu_model) {
       }
       ImPlot::EndPlot();
     }
+    /*
     for (int i = 0; i < number_of_cores; i++) {
       char core_index[30];
       snprintf(core_index, sizeof(core_index), "Core %d##plot temp", i + 1);
@@ -298,9 +298,10 @@ static inline void draw_cpu_chart(std::string &cpu_model) {
         ImPlot::EndPlot();
       }
     }
+    */
   }
   ImGui::End();
-  */ 
+   
   /*
   if (ImGui::Begin(cpu_model.c_str())) {
     for (int i = 0; i < number_of_cores; i++) {
