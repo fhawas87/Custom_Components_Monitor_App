@@ -353,6 +353,25 @@ static inline void draw_fan_chart(int &number_of_available_fans) {
   ImGui::End();
 }
 */
+
+static void ligh_plot_light(const ImVec4 &ACCENT) {
+  ImPlotStyle &ps = ImPlot::GetStyle();
+  ps.LineWeight = 2.0f;
+  ps.Colors[ImPlotCol_PlotBg]   = ImVec4(0.98f, 0.99f, 1.0f, 1.0f);
+  ps.Colors[ImPlotCol_AxisText] = ImVec4(0.12f, 0.12f, 0.14, 1.0f);
+  ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0, 0, 0, 0.10f);
+  ps.Colors[ImPlotCol_FrameBg]  = ImVec4(1, 1, 1, 1);
+
+  static bool colormap_installed = false;
+  if (!colormap_installed) {
+    ImVec4 mono[2] = { ACCENT };
+    ImPlot::AddColormap("MonoAccent", mono, 2);
+    ImPlot::PushColormap("MonoAccent");
+    colormap_installed = true;
+  }
+}
+
+
 int main() {
   
   nvmlReturn_t initialize_result;
@@ -384,7 +403,9 @@ int main() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImPlot::CreateContext();
-  ImGui::StyleColorsDark();
+  ImGui::StyleColorsLight();
+  const ImVec4 Blue = ImVec4(0.26f, 0.59f, 0.98f, 1.0f);
+  ligh_plot_light(Blue);
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init("#version 410");
   
