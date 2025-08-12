@@ -231,43 +231,43 @@ static inline stats get_samples() {
 
 static inline void draw_gpu_chart(std::string &gpu_model) {
   if (ImGui::Begin(gpu_model.c_str())) {
-    if (ImPlot::BeginPlot("temp")) {
+    if (ImPlot::BeginPlot("GPU Temperature")) {
       ImPlot::SetupAxes("t[s]", "C");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 25, 80, ImGuiCond_Always);
       if (!gpu_temp_ring.empty()) {
-        ImPlot::PlotLine("temp", gpu_temp_ring.data(), (int)gpu_temp_ring.size());
+        ImPlot::PlotLine("GPU Temperature", gpu_temp_ring.data(), (int)gpu_temp_ring.size());
       }
       ImPlot::EndPlot();
     }
-    if (ImPlot::BeginPlot("usage")) {
+    if (ImPlot::BeginPlot("GPU Usage")) {
       ImPlot::SetupAxes("t[s]", "%");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!gpu_usage_ring.empty()) {
-        ImPlot::PlotLine("usage", gpu_usage_ring.data(), (int)gpu_usage_ring.size());
+        ImPlot::PlotLine("GPU Usage", gpu_usage_ring.data(), (int)gpu_usage_ring.size());
       }
       ImPlot::EndPlot();
     }
-    if (ImPlot::BeginPlot("freq")) {
+    if (ImPlot::BeginPlot("GPU Frequqncy")) {
       ImPlot::SetupAxes("t[s]", "MHz");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 3000, ImGuiCond_Always);
       if (!gpu_freq_ring.empty()) {
-        ImPlot::PlotLine("freq", gpu_freq_ring.data(), (int)gpu_freq_ring.size());
+        ImPlot::PlotLine("GPU Frequency", gpu_freq_ring.data(), (int)gpu_freq_ring.size());
       }
       ImPlot::EndPlot();
     }
-    if (ImPlot::BeginPlot("VRAM usage")) {
+    if (ImPlot::BeginPlot("VRAM Usage")) {
       ImPlot::SetupAxes("t[s]", "%");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!gpu_vram_usage_ring.empty()) {
-        ImPlot::PlotLine("VRAM usage", gpu_vram_usage_ring.data(), (int)gpu_vram_usage_ring.size());
+        ImPlot::PlotLine("VRAM Usage", gpu_vram_usage_ring.data(), (int)gpu_vram_usage_ring.size());
       }
       ImPlot::EndPlot();
     }
-    if (ImPlot::BeginPlot("power usage")) {
+    if (ImPlot::BeginPlot("GPU Power Usage")) {
       ImPlot::SetupAxes("t[s]", "W");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!gpu_power_usage_ring.empty()) {
-        ImPlot::PlotLine("power usage", gpu_power_usage_ring.data(), (int)gpu_power_usage_ring.size());
+        ImPlot::PlotLine("GPU Power Usage", gpu_power_usage_ring.data(), (int)gpu_power_usage_ring.size());
       }
       ImPlot::EndPlot();
     }
@@ -277,11 +277,11 @@ static inline void draw_gpu_chart(std::string &gpu_model) {
 
 static inline void draw_cpu_chart(std::string &cpu_model) { 
   if (ImGui::Begin(cpu_model.c_str())) {
-    if (ImPlot::BeginPlot("usage")) {
+    if (ImPlot::BeginPlot("CPU Usage")) {
       ImPlot::SetupAxes("t[s]", "%");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!cpu_util_ring.empty()) {
-        ImPlot::PlotLine("usage", cpu_util_ring.data(), cpu_util_ring.size());
+        ImPlot::PlotLine("CPU Usage", cpu_util_ring.data(), cpu_util_ring.size());
       }
       ImPlot::EndPlot();
     }
@@ -325,11 +325,11 @@ static inline void draw_cpu_chart(std::string &cpu_model) {
 
 static inline void draw_ram_chart() {
   if (ImGui::Begin("RAM MEMORY")) {
-    if (ImPlot::BeginPlot("usage")) {
+    if (ImPlot::BeginPlot("RAM Usage")) {
       ImPlot::SetupAxes("t[s]", "%");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!ram_usage_ring.empty()) {
-        ImPlot::PlotLine("usage", ram_usage_ring.data(), ram_usage_ring.size());
+        ImPlot::PlotLine("RAM Usage", ram_usage_ring.data(), ram_usage_ring.size());
       }
       ImPlot::EndPlot();
     }

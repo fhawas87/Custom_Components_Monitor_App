@@ -8,3 +8,6 @@
 [submodule "external/glfw"]
 	path = external/glfw
 	url = https://github.com/glfw/glfw
+[submodule "implot"]
+	path = external/implot
+	url = https://github.com/epezent/implot
