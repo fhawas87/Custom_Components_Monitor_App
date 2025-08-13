@@ -7,7 +7,35 @@ Screenshots of some demo console/application visualization. Only two fans are vi
   <img src="Screenshots/Demo_Console_1.png" alt ="SECOND DEMO CONSOLE SS" width="510">
 </p>
 
-First application visualization with per CPU core temperatures/frequencies & per FAN speed in RPM.
+<h2><p>First application visualization with per CPU core temperatures/frequencies & per FAN speed in RPM.</p></h2>
+
+<h2>CPU</h2>
+<ul>
+    <li><p>Whole CPU Utilization</p></li>
+    <li><p>Temperature of each CPU Core</p></li>
+    <li><p>Frequency of each CPU Core</p></li>
+</ul>
+
+<h2>GPU</h2>
+<ul>
+    <li><p>GPU Temperature</p></li>
+    <li><p>GPU Usage</p></li>
+    <li><p>GPU Frequency</p></li>
+    <li><p>GPU VRAM Usage</p></li>
+    <li><p>GPU Power Usage</p></li>
+</ul>
+
+<h2>RAM</h2>
+<ul>
+    <li><p>RAM Memory Usage (maybe will play with more parameters)</p></li>
+</ul>
+
+<h2>FANS</h2>
+<ul>
+    <li><p>Available Fans Speed in RPM</p></li>
+</ul>
+
+
 
 <p allign="center">
     <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1200">
