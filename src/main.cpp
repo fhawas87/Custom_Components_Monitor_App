@@ -25,7 +25,7 @@
 
 #define MAX_SAMPLES_HISTORY 200
 
-int current_sample_index = -1;
+
 int fabric_cpu_freq = 0;
 
 std::vector<float>                              gpu_temp_ring;
@@ -96,11 +96,10 @@ static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &ve
 }
 
 static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
-  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
+  if (vec[0].size() >= (number_of_cores * MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
     for (int i = 0; i < number_of_cores; i++) {
       vec[i].erase(vec[i].begin());
     }
-    current_sample_index = (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1));
   }
   for (int i = 0; i < number_of_cores; i++) {
     vec[i].emplace_back((float)val.at(i));
@@ -126,9 +125,9 @@ static inline stats get_samples() {
   current_stats.other.fans_speed    = get_available_fans_speed();
   number_of_available_fans          = current_stats.other.fans_speed.size();
   
-  cpu_temps_ring.resize(number_of_cores);
-  cpu_freqs_ring.resize(number_of_cores);
-  for (int i = 0; i < number_of_cores; i++) {
+  cpu_temps_ring.resize(number_of_cores);                                               // HAD TO RESIZE IT BEFORE LOOPING THROUGHT EMPTY VECTOR IG
+  cpu_freqs_ring.resize(number_of_cores);                                               // IN THIS IMPLEMENTATION EACH CORE HAS IT'S OWN VECTOR INSIDE THE RING
+  for (int i = 0; i < number_of_cores; i++) {                                           
     float current_core_temp_value = current_stats.cpu.temps.at(i);
     float current_core_freq_value = current_stats.cpu.freqs.at(i);
     cpu_temps_ring.at(i).emplace_back(current_core_temp_value);
@@ -279,13 +278,19 @@ static inline void draw_fan_chart() {                                 // TODO : 
   ImGui::End();
 }
 
-static void ligh_plot_light(const ImVec4 &ACCENT) {
+static void plot_theme(const ImVec4 &ACCENT) {
   ImPlotStyle &ps = ImPlot::GetStyle();
-  ps.LineWeight = 2.0f;
-  ps.Colors[ImPlotCol_PlotBg]   = ImVec4(0.98f, 0.99f, 1.0f, 1.0f);
-  ps.Colors[ImPlotCol_AxisText] = ImVec4(0.12f, 0.12f, 0.14, 1.0f);
-  ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0, 0, 0, 0.10f);
-  ps.Colors[ImPlotCol_FrameBg]  = ImVec4(1, 1, 1, 1);
+  //ps.LineWeight = 2.0f;
+  //ps.Colors[ImPlotCol_PlotBg]   = ImVec4(0.98f, 0.99f, 1.0f, 1.0f);
+  //ps.Colors[ImPlotCol_AxisText] = ImVec4(0.12f, 0.12f, 0.14, 1.0f);
+  //ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0, 0, 0, 0.10f);
+  //ps.Colors[ImPlotCol_FrameBg]  = ImVec4(1, 1, 1, 1);
+  
+  ps.LineWeight = 1.5f;
+  ps.Colors[ImPlotCol_PlotBg] = ImVec4(0.10f, 0.10f, 0.11f, 1.0f);
+  ps.Colors[ImPlotCol_AxisText] = ImVec4(0.92f, 0.92f, 0.95f, 1.0f);
+  ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0.18f, 0.18f, 0.20f, 1.0f);
+  ps.Colors[ImPlotCol_FrameBg] = ImVec4(0.14f, 0.14f, 0.16f, 1.0f);
 
   static bool colormap_installed = false;
   if (!colormap_installed) {
@@ -330,9 +335,10 @@ int main() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImPlot::CreateContext();
-  ImGui::StyleColorsLight();
-  const ImVec4 Blue = ImVec4(0.26f, 0.59f, 0.98f, 1.0f);
-  ligh_plot_light(Blue);
+  ImGui::StyleColorsDark();
+  //const ImVec4 Blue = ImVec4(0.26f, 0.59f, 0.98f, 1.0f);
+  const ImVec4 LightGrey = ImVec4(0.96f, 0.96f, 0.96f, 10.f);
+  plot_theme(LightGrey);
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init("#version 410");
   
@@ -343,7 +349,6 @@ int main() {
     double current_time = glfwGetTime();
     if (current_time - last_time >= 1.0) {
       stats current_stats = get_samples();
-      current_sample_index++;
       last_time = current_time;
     }
 

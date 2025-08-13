@@ -38,6 +38,7 @@ Screenshots of some demo console/application visualization. Only two fans are vi
 
 
 <p allign="center">
+    <img src="Screenshots/full_app_light_grey_theme.png" alt="LIGHT GREY THEME APP VIS" width="1199">
     <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1199">
 </p>
 
