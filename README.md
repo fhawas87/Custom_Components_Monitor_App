@@ -38,6 +38,6 @@ Screenshots of some demo console/application visualization. Only two fans are vi
 
 
 <p allign="center">
-    <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1200">
+    <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1199">
 </p>
 
