@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(MonitorApp LANGUAGES C CXX)
+set(CMAKE_BUILD_TYPE debug)
+add_compile_options(-g -O0 -fno-omit-frame-pointer)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 99)

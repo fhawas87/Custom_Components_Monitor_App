@@ -6,8 +6,8 @@
 #include <sensors/sensors.h>
 
 
-std::vector<double> get_available_fans_speed() {
-  std::vector<double> fan_tach_info;
+std::vector<float> get_available_fans_speed() {
+  std::vector<float> fan_tach_info;
   int chip_index = 0;
   const sensors_chip_name* chip_name;
   char chip_buffer[64];
@@ -33,7 +33,7 @@ std::vector<double> get_available_fans_speed() {
       double current_fan_speed_RPM = 0;
       if (sensors_get_value(chip_name, sub_feature->number, &current_fan_speed_RPM) == 0) {
         if (current_fan_speed_RPM != 0) { // NEW
-          fan_tach_info.emplace_back(current_fan_speed_RPM);
+          fan_tach_info.emplace_back((float)current_fan_speed_RPM);
         }
       }
     }

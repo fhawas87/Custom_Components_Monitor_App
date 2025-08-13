@@ -2,8 +2,8 @@
 #include <vector>
 
 
-std::vector<unsigned int> get_cpu_cores_frequencies(size_t& number_of_cores) {
-  std::vector<unsigned int> cpu_cores_freq;
+std::vector<float> get_cpu_cores_frequencies(size_t number_of_cores) {
+  std::vector<float> cpu_cores_freq;
   char path_buffer[128];
 
   for (size_t core = 0; core < number_of_cores; core++) {
@@ -23,7 +23,7 @@ std::vector<unsigned int> get_cpu_cores_frequencies(size_t& number_of_cores) {
     fscanf(scaling_cur_freq_info, "%d", &current_cpu_core_freq_kHz);
     
     unsigned int current_cpu_core_freq_mHz = (current_cpu_core_freq_kHz / 1000);
-    cpu_cores_freq.emplace_back(current_cpu_core_freq_mHz);
+    cpu_cores_freq.emplace_back((float)current_cpu_core_freq_mHz);
 
     fclose(scaling_cur_freq_info);
   }

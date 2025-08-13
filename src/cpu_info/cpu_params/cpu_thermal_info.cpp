@@ -6,8 +6,8 @@
 #include <sensors/sensors.h>
 
 
-std::vector<double> get_cpu_cores_temperatures() {
-  std::vector<double> cpu_cores_temp;
+std::vector<float> get_cpu_cores_temperatures() {
+  std::vector<float> cpu_cores_temp;
   int chip_index = 0;
   const sensors_chip_name* chip_name;
   char chip_buffer[64];
@@ -32,7 +32,7 @@ std::vector<double> get_cpu_cores_temperatures() {
 
       double current_core_temperature = 0.0;
       if (sensors_get_value(chip_name, sub_feature->number, &current_core_temperature) == 0) {
-        cpu_cores_temp.emplace_back(current_core_temperature);
+        cpu_cores_temp.emplace_back((float)current_core_temperature);
       }
     }
 

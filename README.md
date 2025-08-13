@@ -7,3 +7,9 @@ Screenshots of some demo console/application visualization. Only two fans are vi
   <img src="Screenshots/Demo_Console_1.png" alt ="SECOND DEMO CONSOLE SS" width="510">
 </p>
 
+First application visualization with per CPU core temperatures/frequencies & per FAN speed in RPM.
+
+<p allign="center">
+    <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1200">
+</p>
+

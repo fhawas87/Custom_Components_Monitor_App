@@ -2,4 +2,4 @@
 
 #include <vector>
 
-std::vector<double> get_available_fans_speed();
+std::vector<float> get_available_fans_speed();

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <cstdlib>
 
 #include <nvml.h>
 #include <sensors/sensors.h>
@@ -25,6 +26,7 @@
 #define MAX_SAMPLES_HISTORY 200
 
 int current_sample_index = -1;
+int fabric_cpu_freq = 0;
 
 std::vector<float>                              gpu_temp_ring;
 std::vector<float>                              gpu_usage_ring;
@@ -34,9 +36,9 @@ std::vector<float>                              gpu_power_usage_ring;
 std::vector<float>                              gpu_vram_usage_ring;
 std::vector<float>                              cpu_util_ring;
 std::vector<float>                              ram_usage_ring;
-std::vector<std::vector<float>>                cpu_temps_ring;
-std::vector<std::vector<float>>                fans_speed_ring;
-std::vector<std::vector<unsigned int>>          cpu_freqs_ring;
+std::vector<std::vector<float>>                 cpu_temps_ring;
+std::vector<std::vector<float>>                 fans_speed_ring;
+std::vector<std::vector<float>>                 cpu_freqs_ring;
 
 size_t number_of_cores = 0;
 size_t number_of_available_fans = 0;
@@ -55,8 +57,8 @@ struct gpu_stats {
 
 struct cpu_stats {
 
-  std::vector<double> temps;
-  std::vector<unsigned int> freqs;
+  std::vector<float> temps;
+  std::vector<float> freqs;
   std::string model;
   double util;
 
@@ -65,7 +67,7 @@ struct cpu_stats {
 struct other_stats {
 
   unsigned int ram_usage;
-  std::vector<double> fans_speed;
+  std::vector<float> fans_speed;
 };
 
 struct stats {
@@ -75,34 +77,34 @@ struct stats {
   other_stats other;
 };
 
-static inline void manage_ring_data_dec(std::vector<float> &vec, float val) { // HERE I THINK I WILL HAVE TO CLEAR VECTOR IF SIZE == MAX_SAMPLES_HISTORY
-  if (vec.size() >= MAX_SAMPLES_HISTORY) { 
+static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {                             // MAX_SAMPLES_HISTORY * 0.20 MAKES SPACE BETWEEN LAST SAMPLE AND END OF PLOT WINDOW
+  if (vec.size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) { 
     vec.erase(vec.begin());
   }
   vec.emplace_back(val);
 }
 
-static inline void manage_ring_data_vec_int(std::vector<std::vector<unsigned int>> &vec, const std::vector<unsigned int> &val) {
-  if (vec.size() >= MAX_SAMPLES_HISTORY) {
-    vec.erase(vec.begin());
+static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
+  if (vec.size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
+    for (int i = 0; i < number_of_available_fans; i++) {
+      vec[i].erase(vec[i].begin());
+    }
   }
-  vec.emplace_back(val);
+  for (int i = 0; i < number_of_available_fans; i++) {
+    vec[i].emplace_back((float)val.at(i));
+  }
 }
 
-static inline void manage_ring_data_vec_double(std::vector<std::vector<float>> &vec, const std::vector<double> &val) {
-  if (vec[0].size() >= MAX_SAMPLES_HISTORY) {
-    //vec.erase(vec.begin());
+static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
+  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
     for (int i = 0; i < number_of_cores; i++) {
       vec[i].erase(vec[i].begin());
-      //vec[i].emplace_back((float)val.at(i));
     }
-    current_sample_index = MAX_SAMPLES_HISTORY;
+    current_sample_index = (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1));
   }
   for (int i = 0; i < number_of_cores; i++) {
     vec[i].emplace_back((float)val.at(i));
   }
-  //vec.emplace_back(val);
-  //current_sample_index++;
 }
 
 static inline stats get_samples() {
@@ -115,22 +117,35 @@ static inline stats get_samples() {
   current_stats.gpu.power_usage     = get_gpu_power_usage();                            manage_ring_data_dec(gpu_power_usage_ring, (float)current_stats.gpu.power_usage);
   current_stats.gpu.vram_info       = get_gpu_VRAM_info();                          
   current_stats.gpu.vram_usage      = current_stats.gpu.vram_info.at(3);                manage_ring_data_dec(gpu_vram_usage_ring, (float)current_stats.gpu.vram_usage);
-
   current_stats.cpu.model           = get_cpu_model_name();                         
-  current_stats.cpu.temps           = get_cpu_cores_temperatures();                     //manage_ring_data_vec_double(cpu_temps_ring, current_stats.cpu.temps);
+  current_stats.cpu.temps           = get_cpu_cores_temperatures();
   number_of_cores                   = current_stats.cpu.temps.size();
-  for (int i = 0; i < number_of_cores; i++) {
-    double current_core_value = current_stats.cpu.temps.at(i);
-    cpu_temps_ring.at(i).emplace_back(current_core_value);
-  }
-                                                                                        manage_ring_data_vec_double(cpu_temps_ring, current_stats.cpu.temps);
-  //current_stats.cpu.freqs           = get_cpu_cores_frequencies(number_of_cores);       manage_ring_data_vec_int(cpu_freqs_ring, current_stats.cpu.freqs);
+  current_stats.cpu.freqs           = get_cpu_cores_frequencies(number_of_cores);
   current_stats.cpu.util            = get_cpu_utilization();                            manage_ring_data_dec(cpu_util_ring, (float)current_stats.cpu.util);
-
   current_stats.other.ram_usage     = get_ram_memory_usage();                           manage_ring_data_dec(ram_usage_ring, (float)current_stats.other.ram_usage);
-  //current_stats.other.fans_speed    = get_available_fans_speed();                       manage_ring_data_vec_double(fans_speed_ring, current_stats.other.fans_speed);
+  current_stats.other.fans_speed    = get_available_fans_speed();
   number_of_available_fans          = current_stats.other.fans_speed.size();
+  
+  cpu_temps_ring.resize(number_of_cores);
+  cpu_freqs_ring.resize(number_of_cores);
+  for (int i = 0; i < number_of_cores; i++) {
+    float current_core_temp_value = current_stats.cpu.temps.at(i);
+    float current_core_freq_value = current_stats.cpu.freqs.at(i);
+    cpu_temps_ring.at(i).emplace_back(current_core_temp_value);
+    cpu_freqs_ring.at(i).emplace_back(current_core_freq_value);
 
+    if (current_core_freq_value > fabric_cpu_freq) {
+      fabric_cpu_freq = (int)(current_core_freq_value * 1.25);                          // IN CASE OF ANY CPU BOOST ( in my case it is boosted so had to change it )
+    }                                                                                   // ADDING 25 % BASED ON MY CPU EXAMPLE 
+  }
+                                                                                        manage_ring_data_vec_cpu(cpu_temps_ring, current_stats.cpu.temps);
+                                                                                        manage_ring_data_vec_cpu(cpu_freqs_ring, current_stats.cpu.freqs);
+  fans_speed_ring.resize(number_of_available_fans);
+  for (int i = 0; i < number_of_available_fans; i++) {
+    float current_fan_value = current_stats.other.fans_speed.at(i);
+    fans_speed_ring.at(i).emplace_back(current_fan_value);
+  }
+                                                                                        manage_ring_data_vec_fans(fans_speed_ring, current_stats.other.fans_speed);
   return current_stats;
 }
 
@@ -180,26 +195,47 @@ static inline void draw_gpu_chart(std::string &gpu_model) {
   ImGui::End();
 }
 
-//static inline generate_and_fill_vectors(std::vector<std::vector<double>>& vec, )
-
-static inline void draw_cpu_chart(std::string &cpu_model) { 
+static int retrieve_static_freq_from_cpu_model(std::string &cpu_model) {
+  const char *char_pointer = cpu_model.c_str();
+  char freq_buffer[4];
+  
+  while (*char_pointer != '@') { char_pointer++; }
+  if (*char_pointer == '@') { 
+    char_pointer++;                                                       // *char_pointer == ' '
+    char_pointer++;                                                       // *char_pointer == '3'
+    freq_buffer[0] = *char_pointer; char_pointer++; char_pointer++;       // *char_pointer == '.' THEN MOVE IT TO *char_pointer == '7'
+    freq_buffer[1] = *char_pointer; char_pointer++;                       // *char_pointer == '0'
+    freq_buffer[2] = *char_pointer;                                       // I BELIEVE EACH INTEL CPU MODEL HAS THE SAME SEQUENCE SO AFTER RETRIEVING FIRST DIGIT, NEXT IS '.' SO I SKIP IT
+    freq_buffer[3] = '\0';                                                
+  }
+  
+  return (10 * atoi(freq_buffer));
+}
+                                  
+static inline void draw_cpu_chart(std::string &cpu_model) {               // TODO : FIX PER CORE PLOT
   if (ImGui::Begin(cpu_model.c_str())) {
-    
-    //std::vector<double> current_ring_values = cpu_temps_ring.back(); // BECAUSE ALWAYS LAST VECTOR INDEX CONTAINS CURRENT DATA WITH RING APPROACH
     for (int core = 0; core < number_of_cores; core++) {
-      //std::vector<double> current_core_ring_value = cpu_temps_ring.at(i).back();
-      std::string current_core_index = "Core " + std::to_string(core);
+      std::string current_core_index = "Core " + std::to_string(core + 1) + " Temperature";
       if (ImPlot::BeginPlot(current_core_index.c_str())) {
         ImPlot::SetupAxes("t[s]", "C");
         ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 90, ImGuiCond_Always);
         if (!cpu_temps_ring.empty()) {
-          //std::vector<float> current_core_ring_vec = cpu_temps_ring[core];
           ImPlot::PlotLine(current_core_index.c_str(), cpu_temps_ring[core].data(), cpu_temps_ring[core].size());
         }
+        ImPlot::EndPlot();
       }
-      ImPlot::EndPlot();
     }
-
+    for (int core = 0; core < number_of_cores; core++) {
+      std::string current_core_index = "Core " + std::to_string(core + 1) + " Frequency";
+      if (ImPlot::BeginPlot(current_core_index.c_str())) {
+        ImPlot::SetupAxes("t[s]", "MHz");
+        ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, fabric_cpu_freq, ImGuiCond_Always);
+        if (!cpu_freqs_ring.empty()) {
+          ImPlot::PlotLine(current_core_index.c_str(), cpu_freqs_ring[core].data(), cpu_freqs_ring[core].size());
+        }
+        ImPlot::EndPlot();
+      }
+    }
     if (ImPlot::BeginPlot("CPU Usage")) {
       ImPlot::SetupAxes("t[s]", "%");
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
@@ -225,23 +261,23 @@ static inline void draw_ram_chart() {
   }
   ImGui::End();
 }
-/*
-static inline void draw_fan_chart(int &number_of_available_fans) {
-  //current_available_fans_value = fans_speed_ring.back();
-  std::vector<double> current_available_fans_value = fans_speed_ring.back();
+
+static inline void draw_fan_chart() {                                 // TODO : FIX - PLOTTING STOPS AFTER CROSSING 200 S
   if (ImGui::Begin("FANS SPEED")) {
-    if (ImPlot::BeginPlot("speed")) {
-      ImPlot::SetupAxes("t[s]", "RPM");
-      ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 3000, ImGuiCond_Always);
-      if (!fans_speed_ring.empty()) {
-        ImPlot::PlotLine("speed", current_available_fans_value.data(), number_of_available_fans);
+    for (int fan = 0; fan < number_of_available_fans; fan++) {
+      std::string current_fan_index = "Fan " + std::to_string(fan + 1) + " Speed";
+      if (ImPlot::BeginPlot(current_fan_index.c_str())) {
+        ImPlot::SetupAxes("t[s]", "RPM");
+        ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 6000, ImGuiCond_Always);
+        if (!fans_speed_ring.empty()) {
+          ImPlot::PlotLine(current_fan_index.c_str(), fans_speed_ring[fan].data(), fans_speed_ring[fan].size());
+        }
+        ImPlot::EndPlot();
       }
-      ImPlot::EndPlot();
     }
   }
   ImGui::End();
 }
-*/
 
 static void ligh_plot_light(const ImVec4 &ACCENT) {
   ImPlotStyle &ps = ImPlot::GetStyle();
@@ -272,9 +308,11 @@ int main() {
     printf("ERROR code : libsensors initialization problem\n");
     return -1;
   }
-
+  
   std::string gpu_model = get_accessible_device_name();
   std::string cpu_model = get_cpu_model_name();
+
+  fabric_cpu_freq = retrieve_static_freq_from_cpu_model(cpu_model);
   
   if (!glfwInit()) { return -1; }
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -316,7 +354,7 @@ int main() {
     draw_gpu_chart(gpu_model);
     draw_cpu_chart(cpu_model);
     draw_ram_chart();
-    //draw_fan_chart(number_of_available_fans);
+    draw_fan_chart();
 
     ImGui::Render();
     int width;
