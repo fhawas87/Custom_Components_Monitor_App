@@ -42,7 +42,7 @@
 <h2><p>Also console visualization below (created firstly for debugging).</p></h2>
 
 <p allign="left">
-    <img src="Screenshots/Console_Demo_Screenshot.png" alt="DEMO_1" width="400">
-    <img src="Screenshots/Demo_Console_1.png" alt="DEMO_2" width="460">
+    <img src="Screenshots/Console_Demo_Screenshot.png" alt="DEMO_1" width="300">
+    <img src="Screenshots/Demo_Console_1.png" alt="DEMO_2" width="350">
 </p>
 
