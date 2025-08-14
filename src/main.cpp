@@ -85,7 +85,7 @@ static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {   
 }
 
 static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
-  if (vec.size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
+  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.2))) {
     for (int i = 0; i < number_of_available_fans; i++) {
       vec[i].erase(vec[i].begin());
     }
@@ -96,7 +96,7 @@ static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &ve
 }
 
 static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
-  if (vec[0].size() >= (number_of_cores * MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
+  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.6))) {
     for (int i = 0; i < number_of_cores; i++) {
       vec[i].erase(vec[i].begin());
     }
@@ -147,6 +147,10 @@ static inline stats get_samples() {
                                                                                         manage_ring_data_vec_fans(fans_speed_ring, current_stats.other.fans_speed);
   return current_stats;
 }
+
+//static inline ImPlot::PlotText(std::vector<float> &vec) {
+  
+//}
 
 static inline void draw_gpu_chart(std::string &gpu_model) {
   if (ImGui::Begin(gpu_model.c_str())) {
@@ -210,7 +214,7 @@ static int retrieve_static_freq_from_cpu_model(std::string &cpu_model) {
   
   return (10 * atoi(freq_buffer));
 }
-                                  
+
 static inline void draw_cpu_chart(std::string &cpu_model) {               // TODO : FIX PER CORE PLOT
   if (ImGui::Begin(cpu_model.c_str())) {
     for (int core = 0; core < number_of_cores; core++) {
@@ -291,6 +295,8 @@ static void plot_theme(const ImVec4 &ACCENT) {
   ps.Colors[ImPlotCol_AxisText] = ImVec4(0.92f, 0.92f, 0.95f, 1.0f);
   ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0.18f, 0.18f, 0.20f, 1.0f);
   ps.Colors[ImPlotCol_FrameBg] = ImVec4(0.14f, 0.14f, 0.16f, 1.0f);
+
+  ImPlot::GetStyle().LineWeight = 0.3f;
 
   static bool colormap_installed = false;
   if (!colormap_installed) {

@@ -1,11 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 project(MonitorApp LANGUAGES C CXX)
-set(CMAKE_BUILD_TYPE debug)
-add_compile_options(-g -O0 -fno-omit-frame-pointer)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_C_STANDARD 99)
+#set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_path(NVML_INCLUDE_DIR
   NAMES nvml.h 
@@ -28,18 +26,7 @@ find_library(LIBSENSORS_LIBRARY
 )
 
 find_package(OpenGL REQUIRED)
-
-if(NOT glfw3_FOUND)
- find_package(glfw3 REQUIRED)
-endif()
-if(TARGET glfw)
-  set(GLFW_LIB glfw)
-elseif(TARGET glfw3)
-  set(GLFW_LIB glfw3)
-else()
-  message(FATAL_ERROR "ERROR GLFW")
-endif()
-
+find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 
 set(SRC
@@ -93,8 +80,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
   imgui
   implot
-  ${GLFW_LIB}
-  #gl3w
+  glfw
   GLEW::GLEW
   OpenGL::GL
   ${NVML_LIBRARY}
