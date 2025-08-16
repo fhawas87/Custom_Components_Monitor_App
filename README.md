@@ -1,5 +1,6 @@
 
-<h2><p>Costom Component Monitor application created using OpenGl, ImGui with ImPlot. Each chart is beeing updated every second with retrieved data from few APIs and system files.</p></h2>
+<h2><p>Costom Component Monitor application created using OpenGl with GLEW, ImGui with ImPlot. Each chart is beeing updated with reatrieved data from few APIs and system files.</p></h2>
+<h2><p>Application works only for Linux with Nvidia GPU and Intel CPU at this moment.
 
 <h2>CPU</h2>
 <ul>
@@ -24,7 +25,7 @@
 
 <h2>FANS</h2>
 <ul>
-    <li><p>Available Fans Speed in RPM      -  libsensors (sensors/sensors.h)</p></li>
+    <li><p>Available Fans Speed in RPM (only two fans are visible in my case. I believe it's caused by chips problems)      -  libsensors (sensors/sensors.h)</p></li>
 </ul>
 
 
@@ -33,16 +34,10 @@
     <img src="Screenshots/full_app_light_grey_theme.png" alt="LIGHT GREY THEME APP VIS" width="1199">
     <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1199">
 </p>
-<p allign="left">
-    <img src="Screenshots/1.png" alt="1" width="400">
-    <img src="Screenshots/2.png" alt="2" width="400">
-    <img src="Screenshots/3.png" alt="3" width="400">
-</p>
 
 <h2><p>Also console visualization below (created firstly for debugging).</p></h2>
 
 <p allign="left">
-    <img src="Screenshots/Console_Demo_Screenshot.png" alt="DEMO_1" width="300">
-    <img src="Screenshots/Demo_Console_1.png" alt="DEMO_2" width="350">
-</p>
+    <img src="Screenshots/Console_Demo_Screenshot.png" alt="DEMO_1" width="400">
+    <img src="Screenshots/Demo_Console_1.png" alt="DEMO_2" width="460">
 

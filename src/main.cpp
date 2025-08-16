@@ -27,6 +27,7 @@
 
 
 int fabric_cpu_freq = 0;
+int max_fan_speed = 0;
 
 std::vector<float>                              gpu_temp_ring;
 std::vector<float>                              gpu_usage_ring;
@@ -77,7 +78,7 @@ struct stats {
   other_stats other;
 };
 
-static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {                             // MAX_SAMPLES_HISTORY * 0.20 MAKES SPACE BETWEEN LAST SAMPLE AND END OF PLOT WINDOW
+static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {                             // MAX_SAMPLES_HISTORY * 0.20 MAKES SPACE BETWEEN LAST SAMPLE AND END OF PLOT WINDOW,
   if (vec.size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) { 
     vec.erase(vec.begin());
   }
@@ -125,8 +126,8 @@ static inline stats get_samples() {
   current_stats.other.fans_speed    = get_available_fans_speed();
   number_of_available_fans          = current_stats.other.fans_speed.size();
   
-  cpu_temps_ring.resize(number_of_cores);                                               // HAD TO RESIZE IT BEFORE LOOPING THROUGHT EMPTY VECTOR IG
-  cpu_freqs_ring.resize(number_of_cores);                                               // IN THIS IMPLEMENTATION EACH CORE HAS IT'S OWN VECTOR INSIDE THE RING
+  cpu_temps_ring.resize(number_of_cores);                                               // HAD TO RESIZE IT BEFORE LOOPING THROUGHT EMPTY VECTOR IG,
+  cpu_freqs_ring.resize(number_of_cores);                                               // IN THIS IMPLEMENTATION EACH CORE HAS IT'S OWN VECTOR INSIDE THE RING,
   for (int i = 0; i < number_of_cores; i++) {                                           
     float current_core_temp_value = current_stats.cpu.temps.at(i);
     float current_core_freq_value = current_stats.cpu.freqs.at(i);
@@ -134,8 +135,8 @@ static inline stats get_samples() {
     cpu_freqs_ring.at(i).emplace_back(current_core_freq_value);
 
     if (current_core_freq_value > fabric_cpu_freq) {
-      fabric_cpu_freq = (int)(current_core_freq_value * 1.25);                          // IN CASE OF ANY CPU BOOST ( in my case it is boosted so had to change it )
-    }                                                                                   // ADDING 25 % BASED ON MY CPU EXAMPLE 
+      fabric_cpu_freq = (int)(current_core_freq_value * 1.25);                          // IN CASE OF ANY CPU BOOST ( in my case it is boosted so had to change it ),
+    }                                                                                   // ADDING 25 % BASED ON MY CPU EXAMPLE ,
   }
                                                                                         manage_ring_data_vec_cpu(cpu_temps_ring, current_stats.cpu.temps);
                                                                                         manage_ring_data_vec_cpu(cpu_freqs_ring, current_stats.cpu.freqs);
@@ -143,14 +144,15 @@ static inline stats get_samples() {
   for (int i = 0; i < number_of_available_fans; i++) {
     float current_fan_value = current_stats.other.fans_speed.at(i);
     fans_speed_ring.at(i).emplace_back(current_fan_value);
-  }
+
+    if (current_fan_value > max_fan_speed && current_fan_value < 3500) {                // I WAS SEEING EXTREMELY HIGH VALUES,
+      max_fan_speed = (int)(current_fan_value * 1.10);                                  // FOR EXAMPLE FAN 2 IN MY CASE WAS SPINNING WITH SPEED AROUND 60000 RPM,
+    }                                                                                   // FROM WHAT I READ IT IS IMPOSSIBLE SO I LOCKED THE VALUE TO 3500 RPM,
+  }                                                                                     // SO I CAN ATLEAST TRACK FAN 1,
                                                                                         manage_ring_data_vec_fans(fans_speed_ring, current_stats.other.fans_speed);
   return current_stats;
 }
 
-//static inline ImPlot::PlotText(std::vector<float> &vec) {
-  
-//}
 
 static inline void draw_gpu_chart(std::string &gpu_model) {
   if (ImGui::Begin(gpu_model.c_str())) {
@@ -215,7 +217,7 @@ static int retrieve_static_freq_from_cpu_model(std::string &cpu_model) {
   return (10 * atoi(freq_buffer));
 }
 
-static inline void draw_cpu_chart(std::string &cpu_model) {               // TODO : FIX PER CORE PLOT
+static inline void draw_cpu_chart(std::string &cpu_model) {
   if (ImGui::Begin(cpu_model.c_str())) {
     for (int core = 0; core < number_of_cores; core++) {
       std::string current_core_index = "Core " + std::to_string(core + 1) + " Temperature";
@@ -271,7 +273,7 @@ static inline void draw_fan_chart() {                                 // TODO : 
       std::string current_fan_index = "Fan " + std::to_string(fan + 1) + " Speed";
       if (ImPlot::BeginPlot(current_fan_index.c_str())) {
         ImPlot::SetupAxes("t[s]", "RPM");
-        ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 6000, ImGuiCond_Always);
+        ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, max_fan_speed, ImGuiCond_Always);
         if (!fans_speed_ring.empty()) {
           ImPlot::PlotLine(current_fan_index.c_str(), fans_speed_ring[fan].data(), fans_speed_ring[fan].size());
         }
@@ -290,13 +292,11 @@ static void plot_theme(const ImVec4 &ACCENT) {
   //ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0, 0, 0, 0.10f);
   //ps.Colors[ImPlotCol_FrameBg]  = ImVec4(1, 1, 1, 1);
   
-  ps.LineWeight = 1.5f;
+  ps.LineWeight = 0.3f;
   ps.Colors[ImPlotCol_PlotBg] = ImVec4(0.10f, 0.10f, 0.11f, 1.0f);
   ps.Colors[ImPlotCol_AxisText] = ImVec4(0.92f, 0.92f, 0.95f, 1.0f);
   ps.Colors[ImPlotCol_AxisGrid] = ImVec4(0.18f, 0.18f, 0.20f, 1.0f);
   ps.Colors[ImPlotCol_FrameBg] = ImVec4(0.14f, 0.14f, 0.16f, 1.0f);
-
-  ImPlot::GetStyle().LineWeight = 0.3f;
 
   static bool colormap_installed = false;
   if (!colormap_installed) {
