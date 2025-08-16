@@ -78,7 +78,7 @@ struct stats {
   other_stats other;
 };
 
-static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {                             // MAX_SAMPLES_HISTORY * 0.20 MAKES SPACE BETWEEN LAST SAMPLE AND END OF PLOT WINDOW,
+static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {                             // MAX_SAMPLES_HISTORY * 0.10 MAKES GOOD LOOKING SPACE BETWEEN LAST SAMPLE AND END OF PLOT WINDOW,
   if (vec.size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) { 
     vec.erase(vec.begin());
   }
@@ -86,9 +86,10 @@ static inline void manage_ring_data_dec(std::vector<float> &vec, float val) {   
 }
 
 static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
-  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.2))) {
+  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
     for (int i = 0; i < number_of_available_fans; i++) {
       vec[i].erase(vec[i].begin());
+      //vec[i + 1].erase(vec[i + 1].begin());
     }
   }
   for (int i = 0; i < number_of_available_fans; i++) {
@@ -96,8 +97,8 @@ static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &ve
   }
 }
 
-static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
-  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.6))) {
+static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) { // IT STARTS TO REFRESH AFTER 45 s, 90 ON CPU PLOT IDK WHY???? TODO
+  if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
     for (int i = 0; i < number_of_cores; i++) {
       vec[i].erase(vec[i].begin());
     }
