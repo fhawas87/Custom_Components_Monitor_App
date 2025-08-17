@@ -89,15 +89,18 @@ static inline void manage_ring_data_vec_fans(std::vector<std::vector<float>> &ve
   if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
     for (int i = 0; i < number_of_available_fans; i++) {
       vec[i].erase(vec[i].begin());
-      //vec[i + 1].erase(vec[i + 1].begin());
     }
   }
   for (int i = 0; i < number_of_available_fans; i++) {
     vec[i].emplace_back((float)val.at(i));
+
+    if ((float)val.at(i) > max_fan_speed && (float)val.at(i) < 3500) {
+      max_fan_speed = (int)((float)val.at(i) * 1.25);
+    }
   }
 }
 
-static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) { // IT STARTS TO REFRESH AFTER 45 s, 90 ON CPU PLOT IDK WHY???? TODO
+static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec, const std::vector<float> &val) {
   if (vec[0].size() >= (MAX_SAMPLES_HISTORY - (MAX_SAMPLES_HISTORY * 0.1))) {
     for (int i = 0; i < number_of_cores; i++) {
       vec[i].erase(vec[i].begin());
@@ -105,8 +108,14 @@ static inline void manage_ring_data_vec_cpu(std::vector<std::vector<float>> &vec
   }
   for (int i = 0; i < number_of_cores; i++) {
     vec[i].emplace_back((float)val.at(i));
+    
+    if ((float)val.at(i) > fabric_cpu_freq) {
+      fabric_cpu_freq = (int)((float)val.at(i) * 1.25);
+    }
   }
 }
+
+bool been_resized = false;
 
 static inline stats get_samples() {
   stats current_stats{};
@@ -127,30 +136,33 @@ static inline stats get_samples() {
   current_stats.other.fans_speed    = get_available_fans_speed();
   number_of_available_fans          = current_stats.other.fans_speed.size();
   
-  cpu_temps_ring.resize(number_of_cores);                                               // HAD TO RESIZE IT BEFORE LOOPING THROUGHT EMPTY VECTOR IG,
-  cpu_freqs_ring.resize(number_of_cores);                                               // IN THIS IMPLEMENTATION EACH CORE HAS IT'S OWN VECTOR INSIDE THE RING,
-  for (int i = 0; i < number_of_cores; i++) {                                           
-    float current_core_temp_value = current_stats.cpu.temps.at(i);
-    float current_core_freq_value = current_stats.cpu.freqs.at(i);
-    cpu_temps_ring.at(i).emplace_back(current_core_temp_value);
-    cpu_freqs_ring.at(i).emplace_back(current_core_freq_value);
+  if (!been_resized) {
+    cpu_temps_ring.resize(number_of_cores);                                             // HAD TO RESIZE IT BEFORE LOOPING THROUGHT EMPTY VECTOR IG,
+    cpu_freqs_ring.resize(number_of_cores);                                             // IN THIS IMPLEMENTATION EACH CORE HAS IT'S OWN VECTOR INSIDE THE RING,
+    for (int i = 0; i < number_of_cores; i++) {                                           
+      float current_core_temp_value = current_stats.cpu.temps.at(i);
+      float current_core_freq_value = current_stats.cpu.freqs.at(i);
+      cpu_temps_ring.at(i).emplace_back(current_core_temp_value);
+      cpu_freqs_ring.at(i).emplace_back(current_core_freq_value);
 
-    if (current_core_freq_value > fabric_cpu_freq) {
-      fabric_cpu_freq = (int)(current_core_freq_value * 1.25);                          // IN CASE OF ANY CPU BOOST ( in my case it is boosted so had to change it ),
-    }                                                                                   // ADDING 25 % BASED ON MY CPU EXAMPLE ,
-  }
+      if (current_core_freq_value > fabric_cpu_freq) {
+        fabric_cpu_freq = (int)(current_core_freq_value * 1.25);                        // IN CASE OF ANY CPU BOOST ( in my case it is boosted so had to change it ),
+      }                                                                                 // ADDING 25 % BASED ON MY CPU EXAMPLE ,
+    }
+                                                                                    
+    fans_speed_ring.resize(number_of_available_fans);
+    for (int i = 0; i < number_of_available_fans; i++) {
+      float current_fan_value = current_stats.other.fans_speed.at(i);
+      fans_speed_ring.at(i).emplace_back(current_fan_value);
+                                                                                        // I WAS SEEING EXTREMELY HIGH VALUES,                                
+                                                                                        // FOR EXAMPLE FAN 2 IN MY CASE WAS SPINNING WITH SPEED AROUND 60000 RPM,
+                                                                                        // FROM WHAT I READ IT IS IMPOSSIBLE SO I LOCKED THE VALUE TO 3500 RPM,
+    }                                                                                   // SO I CAN ATLEAST TRACK FAN 1,
+    been_resized = true;  // ONLY NEED TO RESIZE AND PUSH SMTH TO THE VECTOR ONCE
+  }                       // SO THIS FLAG IS NEEDED FOR STOPPING IT                       
+                                                                                        manage_ring_data_vec_fans(fans_speed_ring, current_stats.other.fans_speed);
                                                                                         manage_ring_data_vec_cpu(cpu_temps_ring, current_stats.cpu.temps);
                                                                                         manage_ring_data_vec_cpu(cpu_freqs_ring, current_stats.cpu.freqs);
-  fans_speed_ring.resize(number_of_available_fans);
-  for (int i = 0; i < number_of_available_fans; i++) {
-    float current_fan_value = current_stats.other.fans_speed.at(i);
-    fans_speed_ring.at(i).emplace_back(current_fan_value);
-
-    if (current_fan_value > max_fan_speed && current_fan_value < 3500) {                // I WAS SEEING EXTREMELY HIGH VALUES,
-      max_fan_speed = (int)(current_fan_value * 1.10);                                  // FOR EXAMPLE FAN 2 IN MY CASE WAS SPINNING WITH SPEED AROUND 60000 RPM,
-    }                                                                                   // FROM WHAT I READ IT IS IMPOSSIBLE SO I LOCKED THE VALUE TO 3500 RPM,
-  }                                                                                     // SO I CAN ATLEAST TRACK FAN 1,
-                                                                                        manage_ring_data_vec_fans(fans_speed_ring, current_stats.other.fans_speed);
   return current_stats;
 }
 

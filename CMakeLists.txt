@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(MonitorApp LANGUAGES C CXX)
 
-#set(CMAKE_CXX_STANDARD 17)
-#set(CMAKE_C_STANDARD 99)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 find_path(NVML_INCLUDE_DIR
   NAMES nvml.h 
   PATHS /usr/include 
@@ -84,6 +80,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   GLEW::GLEW
   OpenGL::GL
   ${NVML_LIBRARY}
-  ${LIBSENSORS_LIBRARIES}
   ${LIBSENSORS_LIBRARY}
 )
