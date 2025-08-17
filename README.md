@@ -32,10 +32,10 @@
 
 <p allign="center">
     <img src="Screenshots/full_app_light_grey_theme.png" alt="LIGHT GREY THEME APP VIS" width="1199">
-    <img src="Screenshots/first_full_app.png" alt="FIRST FULL APP" width="1199">
     <img src="Screenshots/1.png" alt="1" width="270">
     <img src="Screenshots/2.png" alt="2" width="270">
     <img src="Screenshots/3.png" alt="3" width="270">
+    <img src="Screenshots/first_full_app.png" alt="aa" width="1199">
 </p>
 
 <h2><p>Also console visualization below (created firstly for debugging).</p></h2>
