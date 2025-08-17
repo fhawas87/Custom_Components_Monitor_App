@@ -26,8 +26,6 @@
 #define MAX_SAMPLES_HISTORY 200
 
 
-int fabric_cpu_freq = 0;
-int max_fan_speed = 0;
 
 std::vector<float>                              gpu_temp_ring;
 std::vector<float>                              gpu_usage_ring;
@@ -41,6 +39,8 @@ std::vector<std::vector<float>>                 cpu_temps_ring;
 std::vector<std::vector<float>>                 fans_speed_ring;
 std::vector<std::vector<float>>                 cpu_freqs_ring;
 
+int fabric_cpu_freq = 0;
+int max_fan_speed = 0;
 size_t number_of_cores = 0;
 size_t number_of_available_fans = 0;
 
@@ -259,6 +259,7 @@ static inline void draw_cpu_chart(std::string &cpu_model) {
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!cpu_util_ring.empty()) {
         ImPlot::PlotLine("CPU Usage", cpu_util_ring.data(), cpu_util_ring.size());
+        ImPlot::PlotLine("EMA TEST 20", 20, cpu_util_ring.size());
       }
       ImPlot::EndPlot();
     }
@@ -280,7 +281,7 @@ static inline void draw_ram_chart() {
   ImGui::End();
 }
 
-static inline void draw_fan_chart() {                                 // TODO : FIX - PLOTTING STOPS AFTER CROSSING 200 S
+static inline void draw_fan_chart() {                                 
   if (ImGui::Begin("FANS SPEED")) {
     for (int fan = 0; fan < number_of_available_fans; fan++) {
       std::string current_fan_index = "Fan " + std::to_string(fan + 1) + " Speed";
