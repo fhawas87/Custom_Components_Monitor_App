@@ -166,6 +166,30 @@ static inline stats get_samples() {
   return current_stats;
 }
 
+static inline std::vector<float> calculate_values(std::vector<float> &ring) {
+  std::vector<float> min_max_avg;
+
+  float current_min_value = ring.at(0);
+  float current_max_value = ring.at(0);
+
+  unsigned long long sum = 0;
+
+  for (int i = 0; i < ring.size(); i++) {
+    if (current_min_value > ring.at(i)) {
+      current_min_value = ring.at(i);
+    }
+    if (current_max_value < ring.at(i)) {
+      current_max_value = ring.at(i);
+    }
+    sum += (int)ring.at(i);
+  }
+  min_max_avg.emplace_back(current_min_value);
+  min_max_avg.emplace_back(current_max_value);
+  min_max_avg.emplace_back((float)(sum / ring.size()));   // TODO : FOR EACH CHART ADD ITS OWN COMPUTED MIN/MAX/AVG VALUES IN RIGHT TOP CORNER
+  
+  return min_max_avg;
+}
+
 
 static inline void draw_gpu_chart(std::string &gpu_model) {
   if (ImGui::Begin(gpu_model.c_str())) {
@@ -174,6 +198,11 @@ static inline void draw_gpu_chart(std::string &gpu_model) {
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 25, 80, ImGuiCond_Always);
       if (!gpu_temp_ring.empty()) {
         ImPlot::PlotLine("GPU Temperature", gpu_temp_ring.data(), (int)gpu_temp_ring.size());
+        //std::vector<float> min_max_avg = calculate_values(gpu_temp_ring);
+        //printf("min : %f\n", min_max_avg.at(0));
+        //printf("max : %f\n", min_max_avg.at(1));
+        //printf("avg : %f\n", min_max_avg.at(2));
+        //min_max_avg.clear();                            // PRINTS TO MUCH VALUES WHILE LOCATED HERE
       }
       ImPlot::EndPlot();
     }
@@ -259,7 +288,6 @@ static inline void draw_cpu_chart(std::string &cpu_model) {
       ImPlot::SetupAxesLimits(0, MAX_SAMPLES_HISTORY, 0, 100, ImGuiCond_Always);
       if (!cpu_util_ring.empty()) {
         ImPlot::PlotLine("CPU Usage", cpu_util_ring.data(), cpu_util_ring.size());
-        ImPlot::PlotLine("EMA TEST 20", 20, cpu_util_ring.size());
       }
       ImPlot::EndPlot();
     }
