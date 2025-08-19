@@ -6,7 +6,7 @@
 
 
 
-unsigned int get_gpu_clock_frequency() {
+unsigned int get_gpu_clock_frequency(void) {
 
   nvmlDevice_t device = get_device();
   unsigned int core_clock_freq;
@@ -26,7 +26,7 @@ unsigned int get_gpu_clock_frequency() {
 //
 // TODO maybe ?!!!
 
-unsigned int get_gpu_fan_speed() {
+unsigned int get_gpu_fan_speed(void) {
   
   nvmlDevice_t device = get_device();
   unsigned int fan_speed_percentage_value;
@@ -46,7 +46,7 @@ unsigned int get_gpu_fan_speed() {
   return (unsigned int)fan_speed_RPM;
 }
 
-unsigned int get_gpu_power_usage() {
+unsigned int get_gpu_power_usage(void) {
   
   nvmlDevice_t device = get_device();
   unsigned int power_usage;

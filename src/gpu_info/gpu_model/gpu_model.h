@@ -7,8 +7,8 @@
   extern "C" {
 #endif
 
-nvmlDevice_t get_device();
-unsigned int get_current_gpu_temperature();
+nvmlDevice_t get_device(void);
+unsigned int get_current_gpu_temperature(void);
 
 #ifdef __cplusplus
   }
