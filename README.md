@@ -1,6 +1,6 @@
 
-<h2><p>Custom Component Monitor application created using OpenGl with GLEW, ImGui with ImPlot. Each chart is beeing updated with reatrieved data from few APIs and system files.</p></h2>
-<h2><p>Application works only for Linux with Nvidia GPU and Intel CPU at this moment bacause I do not have any other components.
+<h2><p>Custom Component Monitor application created using OpenGl with GLEW, ImGui with ImPlot. Each chart is beeing updated with retrieved data from few APIs and system files.</p></h2>
+<h2><p>Application works only for Linux with Nvidia GPU and Intel CPU at this moment.
 
 <h2>CPU</h2>
 <ul>
